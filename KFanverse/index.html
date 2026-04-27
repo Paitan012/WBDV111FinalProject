@@ -1,10 +1,737 @@
-<DOCTYPE! html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<title> KFanverse </title>
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KFANVERSE</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        body {
+            background: #fff8f9; 
+            color: #4a3b52;
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px; 
+        }
+
+        /* --- HEADER --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            background: linear-gradient(to right, #fbebf3, #eaf2fb, #fbf2e5);
+            border-bottom: 2px solid #eecfea; 
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            color: #b185c7; 
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            letter-spacing: 1px;
+        }
+
+        .logo img {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 25px;
+            font-weight: 800;
+            font-size: 14px;
+            color: #b592c3; 
+        }
+
+        .auth-buttons {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .search-icon {
+            font-size: 20px;
+            color: #b592c3;
+            margin-right: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Fixed Auth Buttons */
+        .auth-buttons button {
+            padding: 8px 24px;
+            border-radius: 25px;
+            border: none;
+            font-weight: 800;
+            font-size: 13px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05); 
+            letter-spacing: 0.5px;
+            transition: opacity 0.2s;
+        }
+        .auth-buttons button:hover { opacity: 0.85; }
+
+        .btn-login { background-color: #c7a8da; color: white; }
+        .btn-signup { background-color: #dfb2df; color: white; }
+
+        /* --- HERO SECTION --- */
+        .hero-container {
+            background: linear-gradient(to bottom, #fdf6fb, #fdf0fa);
+            padding: 30px 0;
+        }
+
+        .hero {
+            display: flex;
+            position: relative;
+            background: linear-gradient(135deg, #d3e8f8 0%, #fadceb 100%); 
+            border-radius: 20px;
+            padding: 30px 65px; 
+            align-items: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            gap: 40px;
+        }
+
+        .hero-img-wrapper {
+            flex: 1.2;
+            height: 300px; 
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .image-track {
+            display: flex;
+            height: 100%;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .image-track img {
+            min-width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-text {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .hero-text .welcome {
+            font-size: 20px;
+            font-weight: 900;
+            color: #b27ebf;
+            margin-bottom: 0px;
+            letter-spacing: 1px;
+        }
+
+        .hero-text h1 {
+            font-size: 46px;
+            color: #b27ebf;
+            line-height: 1;
+            margin-bottom: 15px;
+            font-weight: 900;
+            letter-spacing: 2px;
+        }
+
+        .hero-text p.desc {
+            color: #5d4a66;
+            margin-bottom: 25px;
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 1.4;
+        }
+
+        /* Fixed Explore Button */
+        .btn-explore {
+            background-color: #c49ed5; 
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            border: none;
+            font-weight: 900;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(196, 158, 213, 0.4);
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
+            transition: transform 0.2s;
+        }
+        .btn-explore:hover { transform: translateY(-2px); }
+
+        .carousel-indicators {
+            display: flex;
+            gap: 8px;
+            margin-left: 15px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #dcbceb; 
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active { background: #b27ebf; transform: scale(1.2); }
+
+        /* --- FIXED CAROUSEL ARROW BUTTONS --- */
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 60px;
+            background: transparent;
+            border: none; 
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            transition: opacity 0.2s ease;
+        }
+
+        .carousel-btn:hover { opacity: 0.6; }
+
+        /* CSS-Drawn Chevron Arrows (Matches Mockup Perfectly) */
+        .chevron {
+            width: 22px;
+            height: 22px;
+            border-top: 4px solid #b185c7; 
+            border-right: 4px solid #b185c7;
+            border-radius: 2px;
+        }
+
+        .btn-prev .chevron {
+            transform: rotate(-135deg);
+            margin-left: 10px;
+        }
+
+        .btn-next .chevron {
+            transform: rotate(45deg);
+            margin-right: 10px;
+        }
+
+        /* Hero Arrow Positioning */
+        .hero-btn-prev { left: 5px; }
+        .hero-btn-next { right: 5px; }
+
+        /* --- MAIN GRID LAYOUT --- */
+        .main-content { background-color: white; }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 1.6fr 1fr; 
+        }
+
+        .block {
+            padding: 25px 30px;
+            border-bottom: 2px solid #f0e6f2;
+            border-right: 2px solid #f0e6f2;
+        }
+        
+        .block:nth-child(even) { border-right: none; } 
+
+        .bg-lightblue { background-color: #eaf6fc; }
+        .bg-lightyellow { background-color: #fdf5e6; }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-header h2 { font-size: 18px; color: #3b2a45; font-weight: 900; }
+        .view-all { font-size: 14px; font-weight: 800; color: #4a3b52; }
+
+        /* Latest Updates */
+        .updates-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+        .update-card { position: relative; }
+        .update-card img { width: 100%; border-radius: 12px; aspect-ratio: 1; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.05);}
+        .update-card h3 { font-size: 14px; font-weight: 800; margin: 10px 0 2px; color: #3b2a45;}
+        .update-card p { font-size: 13px; color: #6a5a73; font-weight: 600; margin-bottom: 5px;}
+        .update-card .time { font-size: 12px; color: #888; font-weight: 600; }
+        
+        .badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: white;
+            color: #3b2a45;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .badge-bottom {
+            position: absolute;
+            bottom: 85px; 
+            left: 10px;
+            color: white;
+            font-size: 12px;
+            font-weight: 800;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+            letter-spacing: 0.5px;
+        }
+
+        /* Trending Quizzes */
+        .quiz-item { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+        .quiz-item img { width: 70px; height: 70px; border-radius: 10px; object-fit: cover; border: 2px solid #f3e5f5;}
+        .quiz-info h4 { font-size: 13px; font-weight: 800; margin-bottom: 5px; color: #3b2a45; }
+        
+        /* Fixed Quiz Buttons */
+        .btn-quiz { 
+            background-color: #d1b3e0; 
+            color: white; 
+            border: none; 
+            padding: 6px 18px; 
+            border-radius: 20px; 
+            font-size: 11px; 
+            font-weight: 800; 
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            transition: background-color 0.2s;
+        }
+        .btn-quiz:hover { background-color: #b898c8; }
+
+        /* Popular Discussions */
+        .discussion-item { 
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
+            background-color: #fcf8ee; 
+            padding: 12px 15px; 
+            border-radius: 12px; 
+            margin-bottom: 12px; 
+            border: 1px solid #f2e3cc; 
+        }
+        .disc-icon { width: 40px; height: 40px; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .disc-icon img { width: 100%; height: 100%; object-fit: cover; }
+        .disc-info h4 { font-size: 14px; font-weight: 800; color: #3b2a45; margin-bottom: 2px;}
+        .disc-info p { font-size: 12px; color: #6a5a73; font-weight: 600; }
+
+        /* Featured Merch */
+        .merch-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+        .merch-item { text-align: center; }
+        .merch-img-box {
+            background: white; 
+            border-radius: 12px; 
+            padding: 10px; 
+            border: 1px solid #f0e6f2;
+            margin-bottom: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .merch-item img { max-width: 100%; max-height: 100px; object-fit: contain; }
+        .merch-item h4 { font-size: 12px; font-weight: 800; color: #3b2a45;}
+        .merch-item p { font-size: 12px; font-weight: 800; color: #6a5a73; }
+        
+        .merch-dots {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin-top: 15px;
+        }
+        .merch-dots .dot { background: #dcbceb; width: 8px; height: 8px; }
+
+        /* --- MEMBERS CAROUSEL SECTION --- */
+        .members-section {
+            background: linear-gradient(to right, #f6e6f2, #eaf2fb, #fdf1e7); 
+            padding: 40px 0;
+            border-bottom: 2px solid #eecfea; 
+        }
+
+        .members-section h2 {
+            font-size: 20px;
+            color: #3b2a45;
+            font-weight: 900;
+            margin-bottom: 25px;
+            padding: 0 40px;
+        }
+
+        .members-carousel-wrapper {
+            position: relative;
+            padding: 0 60px; 
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Members Arrow Positioning */
+        .member-btn-prev { left: 0; }
+        .member-btn-next { right: 0; }
+
+        .members-track-container {
+            overflow: hidden;
+            width: 100%;
+            padding: 10px 0; 
+        }
+
+        .members-track {
+            display: flex;
+            gap: 20px;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .member { 
+            text-align: center; 
+            flex: 0 0 calc((100% - (20px * 5)) / 6); 
+        }
+        
+        .member-img-wrap {
+            width: 100%;
+            aspect-ratio: 1 / 1.15; 
+            border-radius: 18px;
+            background: linear-gradient(180deg, #d4a5d4 0%, #f8e5c0 100%); 
+            padding: 3px; 
+            margin-bottom: 10px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            overflow: hidden;
+            display: flex;
+            align-items: flex-end; 
+        }
+
+        .member-img-wrap img {
+            width: 100%;
+            height: 100%;
+            border-radius: 15px; 
+            object-fit: cover;
+        }
+
+        .member:hover .member-img-wrap { transform: translateY(-5px); }
+
+        .member h4 { font-size: 16px; font-weight: 900; color: #3b2a45; }
+        .member p { font-size: 12px; color: #6a5a73; font-weight: 700; }
+
+        /* Footer */
+        footer {
+            background: #fffdf9; 
+            padding: 40px 0;
+        }
+
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 30px; }
+        .footer-col h3 { margin-bottom: 15px; font-size: 14px; color: #3b2a45; font-weight: 900; }
+        .footer-col ul li { margin-bottom: 8px; font-size: 13px; color: #6a5a73; font-weight: 700; cursor: pointer; }
+        
+        .social-icons { display: flex; gap: 10px; align-items: center;}
+        .social-icons img { width: 35px; height: 35px; border-radius: 50%; opacity: 0.7; cursor: pointer;}
+        .social-icons img:hover { opacity: 1; }
+
+    </style>
+</head>
 <body>
-	<h2>Coming soon...</h2>
+
+<header>
+    <div class="header-content">
+        <div class="logo">
+            <img src="BB.jfif" alt="Logo">
+            KFANVERSE
+        </div>
+        <nav>
+            <ul>
+                <li>HOME</li>
+                <li>UPDATES</li>
+                <li>QUIZZES</li>
+                <li>DISCUSSIONS</li>
+                <li>MERCHANDISE</li>
+                <li>ABOUT US</li>
+            </ul>
+        </nav>
+        <div class="auth-buttons">
+            <span class="search-icon">⚲</span>
+            <button class="btn-login">LOGIN</button>
+            <button class="btn-signup">SIGN UP</button>
+        </div>
+    </div>
+</header>
+
+<div class="hero-container">
+    <div class="container">
+        <section class="hero" id="hero-section">
+            
+            <button class="carousel-btn btn-prev hero-btn-prev">
+                <div class="chevron"></div>
+            </button>
+
+            <div class="hero-img-wrapper">
+                <div class="image-track">
+                    <img src="BB1.jfif" alt="Group Photo 1">
+                    <img src="BB2.jfif" alt="Group Photo 2">
+                    <img src="BB.jfif" alt="Group Photo 3">
+                </div>
+            </div>
+
+            <div class="hero-text">
+                <p class="welcome">WELCOME TO</p>
+                <h1>KFANVERSE</h1>
+                <p class="desc">Your Ultimate K-POP Universe<br>Updates, Quizzes, Discussions,<br>Merch and many more!</p>
+                <button class="btn-explore">EXPLORE NOW ✨</button>
+                
+                <div class="carousel-indicators">
+                    <div class="dot active"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+            </div>
+            
+            <button class="carousel-btn btn-next hero-btn-next">
+                <div class="chevron"></div>
+            </button>
+
+        </section>
+    </div>
+</div>
+
+<div class="main-content">
+    <div class="container grid-layout">
+        
+        <div class="block bg-lightblue">
+            <div class="section-header"><h2>LATEST UPDATES</h2><a href="#" class="view-all">View All</a></div>
+            <div class="updates-grid">
+                <div class="update-card">
+                    <img src="BB.jfif" alt="News">
+                    <span class="badge">NEWS</span>
+                    <h3>News Title</h3><p>Short description</p><div class="time">_hr Ago</div>
+                </div>
+                <div class="update-card">
+                    <img src="Nayeon.jfif" alt="News">
+                    <span class="badge">NEWS</span>
+                    <span class="badge-bottom">TEASER IMAGE</span>
+                    <h3>News Title</h3><p>Short description</p><div class="time">_hr Ago</div>
+                </div>
+                <div class="update-card">
+                    <img src="BB2.jfif" alt="News">
+                    <span class="badge">NEWS</span>
+                    <h3>News Title</h3><p>Short description</p><div class="time">_hr Ago</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="block bg-lightyellow">
+            <div class="section-header"><h2>TRENDING QUIZZES</h2><a href="#" class="view-all">View All</a></div>
+            <div class="quiz-list">
+                <div class="quiz-item"><img src="Jeongyeon User.jfif" alt="Quiz"><div class="quiz-info"><h4>Which K-Pop Idol Are You?</h4><button class="btn-quiz">TAKE QUIZ</button></div></div>
+                <div class="quiz-item"><img src="Mina User.jfif" alt="Quiz"><div class="quiz-info"><h4>How Well Do You Know (X-POP group)?</h4><button class="btn-quiz">TAKE QUIZ</button></div></div>
+                <div class="quiz-item"><img src="Chaeyoung User.jfif" alt="Quiz"><div class="quiz-info"><h4>Guess the K-Pop MV</h4><button class="btn-quiz">TAKE QUIZ</button></div></div>
+            </div>
+        </div>
+
+        <div class="block bg-lightblue">
+            <div class="section-header"><h2>POPULAR DISCUSSIONS</h2><a href="#" class="view-all">View All</a></div>
+            <div class="discussion-list">
+                <div class="discussion-item">
+                    <div class="disc-icon"><img src="Nayeon User.jfif" alt="User"></div>
+                    <div class="disc-info"><h4>What's your favorite comeback this year?</h4><p>By User1 • 89 replies • _hr ago</p></div>
+                </div>
+                <div class="discussion-item">
+                    <div class="disc-icon"><img src="Sana User.jfif" alt="User"></div>
+                    <div class="disc-info"><h4>What's your favorite comeback this year?</h4><p>By User12 • 70 replies • _hr ago</p></div>
+                </div>
+                <div class="discussion-item">
+                    <div class="disc-icon"><img src="Jihyo User.jfif" alt="User"></div>
+                    <div class="disc-info"><h4>What's your favorite comeback this year?</h4><p>By User123 • 0 replies • _hr ago</p></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="block bg-lightyellow">
+            <div class="section-header"><h2>FEATURED MERCH</h2><a href="#" class="view-all">View All</a></div>
+            <div class="merch-grid">
+                <div class="merch-item"><div class="merch-img-box"><img src="Momo User.jfif" alt="Lightstick"></div><h4>Product Name</h4><p>P999.99</p></div>
+                <div class="merch-item"><div class="merch-img-box"><img src="Dahyun User.jfif" alt="Album"></div><h4>Product Name</h4><p>P999.99</p></div>
+                <div class="merch-item"><div class="merch-img-box"><img src="Tzuyu User.jfif" alt="Plush"></div><h4>Product Name</h4><p>P999.99</p></div>
+                <div class="merch-item"><div class="merch-img-box"><img src="Chaeyoung User.jfif" alt="Hoodie"></div><h4>Product Name</h4><p>P999.99</p></div>
+            </div>
+            <div class="merch-dots">
+                <div class="dot active"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="members-section">
+    <div class="container" style="padding:0;">
+        <h2>K-POP GROUP MEMBERS</h2>
+        <div class="members-carousel-wrapper">
+            
+            <button class="carousel-btn btn-prev member-btn-prev">
+                <div class="chevron"></div>
+            </button>
+
+            <div class="members-track-container">
+                <div class="members-track">
+                    <div class="member"><div class="member-img-wrap"><img src="Jihyo.jfif" alt="Jihyo"></div><h4>Jihyo</h4><p>Position</p></div>
+                    <div class="member"><div class="member-img-wrap"><img src="Nayeon.jfif" alt="Nayeon"></div><h4>Nayeon</h4><p>Position</p></div>
+                    <div class="member"><div class="member-img-wrap"><img src="Sana.jfif" alt="Sana"></div><h4>Sana</h4><p>Position</p></div>
+                    <div class="member"><div class="member-img-wrap"><img src="Tzuyu.jfif" alt="Tzuyu"></div><h4>Tzuyu</h4><p>Position</p></div>
+                    <div class="member"><div class="member-img-wrap"><img src="Dahyun.jfif" alt="Dahyun"></div><h4>Dahyun</h4><p>Position</p></div>
+                    <div class="member"><div class="member-img-wrap"><img src="Momo.jfif" alt="Momo"></div><h4>Momo</h4><p>Position</p></div>
+                    <div class="member"><div class="member-img-wrap"><img src="Jeongyeon.jfif" alt="Jeongyeon"></div><h4>Jeongyeon</h4><p>Position</p></div>
+                    <div class="member"><div class="member-img-wrap"><img src="Mina.jfif" alt="Mina"></div><h4>Mina</h4><p>Position</p></div>
+                    <div class="member"><div class="member-img-wrap"><img src="Chaeyoung.jfif" alt="Chaeyoung"></div><h4>Chaeyoung</h4><p>Position</p></div>
+                </div>
+            </div>
+
+            <button class="carousel-btn btn-next member-btn-next">
+                <div class="chevron"></div>
+            </button>
+            
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="container footer-grid">
+        <div class="footer-col">
+            <div class="logo" style="margin-bottom: 10px;">
+                <img src="BB.jfif" alt="Logo">
+                KFANVERSE
+            </div>
+            <p style="font-size: 13px; color: #6a5a73; margin-bottom: 20px; font-weight: 700;">Your Ultimate K-POP Universe<br>Updates, Quizzes, Discussions,<br>Merch and many more!</p>
+        </div>
+        <div class="footer-col">
+            <h3>QUICK LINKS</h3>
+            <ul><li>Home</li><li>Updates</li><li>Quizzes</li><li>Discussions</li><li>Merchandise</li><li>About Us</li></ul>
+        </div>
+        <div class="footer-col">
+            <h3>SUPPORT</h3>
+            <ul><li>Contact Us</li><li>FAQ</li><li>Guidelines</li><li>Privacy Policy</li><li>Terms of Service</li></ul>
+        </div>
+        <div class="footer-col">
+            <h3>FOLLOW US</h3>
+            <div class="social-icons">
+                <img src="Nayeon User.jfif" alt="FB">
+                <img src="Jeongyeon User.jfif" alt="IG">
+                <img src="Momo User.jfif" alt="YT">
+                <img src="Sana User.jfif" alt="X">
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // --- HERO IMAGE AUTOPLAY CAROUSEL ---
+    const heroTrack = document.querySelector('.hero .image-track');
+    const heroImages = Array.from(heroTrack.children);
+    const heroNextBtn = document.querySelector('.hero-btn-next');
+    const heroPrevBtn = document.querySelector('.hero-btn-prev');
+    const dots = Array.from(document.querySelectorAll('.hero-text .dot'));
+
+    let heroIndex = 0;
+    let autoPlayInterval;
+
+    function moveHeroToSlide(index) {
+        if (index < 0) {
+            index = heroImages.length - 1;
+        } else if (index >= heroImages.length) {
+            index = 0;
+        }
+
+        heroTrack.style.transform = `translateX(-${index * 100}%)`;
+        
+        dots.forEach(dot => dot.classList.remove('active'));
+        if(dots[index]) dots[index].classList.add('active');
+        
+        heroIndex = index;
+    }
+
+    function startAutoPlay() {
+        autoPlayInterval = setInterval(() => {
+            moveHeroToSlide(heroIndex + 1);
+        }, 4000); 
+    }
+
+    function resetAutoPlay() {
+        clearInterval(autoPlayInterval);
+        startAutoPlay();
+    }
+
+    heroNextBtn.addEventListener('click', () => { moveHeroToSlide(heroIndex + 1); resetAutoPlay(); });
+    heroPrevBtn.addEventListener('click', () => { moveHeroToSlide(heroIndex - 1); resetAutoPlay(); });
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => { moveHeroToSlide(index); resetAutoPlay(); });
+    });
+
+    startAutoPlay();
+
+    // --- MEMBERS CAROUSEL ---
+    const membersTrack = document.querySelector('.members-track');
+    const memNextBtn = document.querySelector('.member-btn-next');
+    const memPrevBtn = document.querySelector('.member-btn-prev');
+    
+    let memIndex = 0;
+    // 9 members total, showing 6 at a time. Maximum shifts = 3.
+    const maxMemIndex = 3; 
+
+    function updateMemberCarousel() {
+        const singleMember = document.querySelector('.member');
+        // Add the gap (20px) to the width to calculate full slide distance
+        const slideDistance = singleMember.offsetWidth + 20; 
+        membersTrack.style.transform = `translateX(-${memIndex * slideDistance}px)`;
+    }
+
+    memNextBtn.addEventListener('click', () => {
+        if (memIndex < maxMemIndex) {
+            memIndex++;
+            updateMemberCarousel();
+        }
+    });
+
+    memPrevBtn.addEventListener('click', () => {
+        if (memIndex > 0) {
+            memIndex--;
+            updateMemberCarousel();
+        }
+    });
+
+    window.addEventListener('resize', updateMemberCarousel);
+</script>
+
 </body>
 </html>
