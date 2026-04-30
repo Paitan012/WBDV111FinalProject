@@ -7,6 +7,14 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
 
+        :root {
+            --primary-pink: #FFC0CB; /* Example from character hair */
+            --primary-mint: #98FF98; /* Example from hair accents */
+            --primary-cream: #FFFDD0; /* Example from sweater */
+            --text-color-dark: #4a3b52;
+            --background-base: #fff8f9;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -15,8 +23,8 @@
         }
 
         body {
-            background: #fff8f9; 
-            color: #4a3b52;
+            background: var(--background-base); 
+            color: var(--text-color-dark);
             line-height: 1.5;
             overflow-x: hidden;
         }
@@ -37,8 +45,9 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px 0;
-            background: linear-gradient(to right, #fbebf3, #eaf2fb, #fbf2e5);
-            border-bottom: 2px solid #eecfea; 
+            /* Updated gradient using character palette */
+            background: linear-gradient(to right, #fdf1f5, #e0f2f1, #fffbef);
+            border-bottom: 2px solid #e0f2f1; 
         }
 
         .header-content {
@@ -54,7 +63,8 @@
         .logo {
             font-size: 24px;
             font-weight: 900;
-            color: #b185c7; 
+            /* Update to a color from character (e.g., eye color or deep pink) */
+            color: #795548; 
             display: flex;
             align-items: center;
             gap: 8px;
@@ -72,7 +82,8 @@
             gap: 25px;
             font-weight: 800;
             font-size: 14px;
-            color: #b592c3; 
+            /* Adjusted color from palette */
+            color: #8c7b75; 
         }
 
         .auth-buttons {
@@ -83,13 +94,12 @@
 
         .search-icon {
             font-size: 20px;
-            color: #b592c3;
+            color: #8c7b75;
             margin-right: 5px;
             cursor: pointer;
             font-weight: bold;
         }
 
-        /* Fixed Auth Buttons */
         .auth-buttons button {
             padding: 8px 24px;
             border-radius: 25px;
@@ -103,19 +113,22 @@
         }
         .auth-buttons button:hover { opacity: 0.85; }
 
-        .btn-login { background-color: #c7a8da; color: white; }
-        .btn-signup { background-color: #dfb2df; color: white; }
+        /* Updated colors */
+        .btn-login { background-color: #80cbc4; color: white; } /* Mint accent */
+        .btn-signup { background-color: #ff80ab; color: white; } /* Pink accent */
 
         /* --- HERO SECTION --- */
         .hero-container {
-            background: linear-gradient(to bottom, #fdf6fb, #fdf0fa);
+            /* Updated gradient base */
+            background: linear-gradient(to bottom, #fff8f9, #fdf6fb);
             padding: 30px 0;
         }
 
         .hero {
             display: flex;
             position: relative;
-            background: linear-gradient(135deg, #d3e8f8 0%, #fadceb 100%); 
+            /* Background gradient updated to character palette */
+            background: linear-gradient(135deg, #e0f2f1 0%, #fce4ec 100%); 
             border-radius: 20px;
             padding: 30px 65px; 
             align-items: center;
@@ -155,14 +168,14 @@
         .hero-text .welcome {
             font-size: 20px;
             font-weight: 900;
-            color: #b27ebf;
+            color: #d81b60; /* Adjusted pink from palette */
             margin-bottom: 0px;
             letter-spacing: 1px;
         }
 
         .hero-text h1 {
             font-size: 46px;
-            color: #b27ebf;
+            color: #d81b60;
             line-height: 1;
             margin-bottom: 15px;
             font-weight: 900;
@@ -170,16 +183,16 @@
         }
 
         .hero-text p.desc {
-            color: #5d4a66;
+            color: var(--text-color-dark);
             margin-bottom: 25px;
             font-size: 16px;
             font-weight: 700;
             line-height: 1.4;
         }
 
-        /* Fixed Explore Button */
         .btn-explore {
-            background-color: #c49ed5; 
+            /* Updated colors */
+            background-color: #4db6ac; 
             color: white;
             padding: 10px 25px;
             border-radius: 25px;
@@ -187,7 +200,7 @@
             font-weight: 900;
             font-size: 14px;
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(196, 158, 213, 0.4);
+            box-shadow: 0 4px 10px rgba(77, 182, 172, 0.4);
             margin-bottom: 15px;
             letter-spacing: 0.5px;
             transition: transform 0.2s;
@@ -204,14 +217,13 @@
             width: 10px;
             height: 10px;
             border-radius: 50%;
-            background: #dcbceb; 
+            background: #b2dfdb; /* Lighter mint */
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
-        .dot.active { background: #b27ebf; transform: scale(1.2); }
+        .dot.active { background: #4db6ac; transform: scale(1.2); }
 
-        /* --- FIXED CAROUSEL ARROW BUTTONS --- */
         .carousel-btn {
             position: absolute;
             top: 50%;
@@ -230,12 +242,11 @@
 
         .carousel-btn:hover { opacity: 0.6; }
 
-        /* CSS-Drawn Chevron Arrows (Matches Mockup Perfectly) */
         .chevron {
             width: 22px;
             height: 22px;
-            border-top: 4px solid #b185c7; 
-            border-right: 4px solid #b185c7;
+            border-top: 4px solid #4db6ac; /* Chevrons use palette accent */
+            border-right: 4px solid #4db6ac;
             border-radius: 2px;
         }
 
@@ -249,7 +260,6 @@
             margin-right: 10px;
         }
 
-        /* Hero Arrow Positioning */
         .hero-btn-prev { left: 5px; }
         .hero-btn-next { right: 5px; }
 
@@ -263,14 +273,15 @@
 
         .block {
             padding: 25px 30px;
-            border-bottom: 2px solid #f0e6f2;
-            border-right: 2px solid #f0e6f2;
+            border-bottom: 2px solid #e0f2f1;
+            border-right: 2px solid #e0f2f1;
         }
         
         .block:nth-child(even) { border-right: none; } 
 
-        .bg-lightblue { background-color: #eaf6fc; }
-        .bg-lightyellow { background-color: #fdf5e6; }
+        /* Updated colors for blocks to character palette */
+        .bg-lightpink { background-color: #fce4ec; }
+        .bg-lightcream { background-color: #fffbef; }
 
         .section-header {
             display: flex;
@@ -279,14 +290,14 @@
             margin-bottom: 20px;
         }
 
-        .section-header h2 { font-size: 18px; color: #3b2a45; font-weight: 900; }
-        .view-all { font-size: 14px; font-weight: 800; color: #4a3b52; }
+        .section-header h2 { font-size: 18px; color: #d81b60; font-weight: 900; }
+        .view-all { font-size: 14px; font-weight: 800; color: #8c7b75; }
 
         /* Latest Updates */
         .updates-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
         .update-card { position: relative; }
         .update-card img { width: 100%; border-radius: 12px; aspect-ratio: 1; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.05);}
-        .update-card h3 { font-size: 14px; font-weight: 800; margin: 10px 0 2px; color: #3b2a45;}
+        .update-card h3 { font-size: 14px; font-weight: 800; margin: 10px 0 2px; color: var(--text-color-dark);}
         .update-card p { font-size: 13px; color: #6a5a73; font-weight: 600; margin-bottom: 5px;}
         .update-card .time { font-size: 12px; color: #888; font-weight: 600; }
         
@@ -295,7 +306,7 @@
             top: 10px;
             right: 10px;
             background: white;
-            color: #3b2a45;
+            color: #d81b60;
             font-size: 10px;
             font-weight: 800;
             padding: 3px 8px;
@@ -316,12 +327,12 @@
 
         /* Trending Quizzes */
         .quiz-item { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
-        .quiz-item img { width: 70px; height: 70px; border-radius: 10px; object-fit: cover; border: 2px solid #f3e5f5;}
-        .quiz-info h4 { font-size: 13px; font-weight: 800; margin-bottom: 5px; color: #3b2a45; }
+        .quiz-item img { width: 70px; height: 70px; border-radius: 10px; object-fit: cover; border: 2px solid #b2dfdb;}
+        .quiz-info h4 { font-size: 13px; font-weight: 800; margin-bottom: 5px; color: var(--text-color-dark); }
         
-        /* Fixed Quiz Buttons */
         .btn-quiz { 
-            background-color: #d1b3e0; 
+            /* Update to palette mint */
+            background-color: #4db6ac; 
             color: white; 
             border: none; 
             padding: 6px 18px; 
@@ -332,22 +343,22 @@
             letter-spacing: 0.5px;
             transition: background-color 0.2s;
         }
-        .btn-quiz:hover { background-color: #b898c8; }
+        .btn-quiz:hover { background-color: #00897b; }
 
         /* Popular Discussions */
         .discussion-item { 
             display: flex; 
             align-items: center; 
             gap: 15px; 
-            background-color: #fcf8ee; 
+            background-color: #fffbef; /* Cream */
             padding: 12px 15px; 
             border-radius: 12px; 
             margin-bottom: 12px; 
-            border: 1px solid #f2e3cc; 
+            border: 1px solid #e0f2f1; 
         }
         .disc-icon { width: 40px; height: 40px; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; }
         .disc-icon img { width: 100%; height: 100%; object-fit: cover; }
-        .disc-info h4 { font-size: 14px; font-weight: 800; color: #3b2a45; margin-bottom: 2px;}
+        .disc-info h4 { font-size: 14px; font-weight: 800; color: var(--text-color-dark); margin-bottom: 2px;}
         .disc-info p { font-size: 12px; color: #6a5a73; font-weight: 600; }
 
         /* Featured Merch */
@@ -357,7 +368,7 @@
             background: white; 
             border-radius: 12px; 
             padding: 10px; 
-            border: 1px solid #f0e6f2;
+            border: 1px solid #e0f2f1;
             margin-bottom: 8px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.02);
             height: 120px;
@@ -366,7 +377,7 @@
             justify-content: center;
         }
         .merch-item img { max-width: 100%; max-height: 100px; object-fit: contain; }
-        .merch-item h4 { font-size: 12px; font-weight: 800; color: #3b2a45;}
+        .merch-item h4 { font-size: 12px; font-weight: 800; color: var(--text-color-dark);}
         .merch-item p { font-size: 12px; font-weight: 800; color: #6a5a73; }
         
         .merch-dots {
@@ -375,18 +386,19 @@
             gap: 5px;
             margin-top: 15px;
         }
-        .merch-dots .dot { background: #dcbceb; width: 8px; height: 8px; }
+        .merch-dots .dot { background: #b2dfdb; width: 8px; height: 8px; }
 
         /* --- MEMBERS CAROUSEL SECTION --- */
         .members-section {
-            background: linear-gradient(to right, #f6e6f2, #eaf2fb, #fdf1e7); 
+            /* Update gradient base and borders */
+            background: linear-gradient(to right, #fce4ec, #e0f2f1, #fffbef); 
             padding: 40px 0;
-            border-bottom: 2px solid #eecfea; 
+            border-bottom: 2px solid #e0f2f1; 
         }
 
         .members-section h2 {
             font-size: 20px;
-            color: #3b2a45;
+            color: #d81b60;
             font-weight: 900;
             margin-bottom: 25px;
             padding: 0 40px;
@@ -399,7 +411,6 @@
             margin: 0 auto;
         }
 
-        /* Members Arrow Positioning */
         .member-btn-prev { left: 0; }
         .member-btn-next { right: 0; }
 
@@ -424,7 +435,8 @@
             width: 100%;
             aspect-ratio: 1 / 1.15; 
             border-radius: 18px;
-            background: linear-gradient(180deg, #d4a5d4 0%, #f8e5c0 100%); 
+            /* Updated border gradient based on palette */
+            background: linear-gradient(180deg, #ff80ab 0%, #fff176 100%); 
             padding: 3px; 
             margin-bottom: 10px;
             box-shadow: 0 6px 12px rgba(0,0,0,0.1);
@@ -443,17 +455,17 @@
 
         .member:hover .member-img-wrap { transform: translateY(-5px); }
 
-        .member h4 { font-size: 16px; font-weight: 900; color: #3b2a45; }
+        .member h4 { font-size: 16px; font-weight: 900; color: var(--text-color-dark); }
         .member p { font-size: 12px; color: #6a5a73; font-weight: 700; }
 
         /* Footer */
         footer {
-            background: #fffdf9; 
+            background: #fffbef; /* Cream */
             padding: 40px 0;
         }
 
         .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 30px; }
-        .footer-col h3 { margin-bottom: 15px; font-size: 14px; color: #3b2a45; font-weight: 900; }
+        .footer-col h3 { margin-bottom: 15px; font-size: 14px; color: #d81b60; font-weight: 900; }
         .footer-col ul li { margin-bottom: 8px; font-size: 13px; color: #6a5a73; font-weight: 700; cursor: pointer; }
         
         .social-icons { display: flex; gap: 10px; align-items: center;}
@@ -470,16 +482,17 @@
             <img src="BB.jfif" alt="Logo">
             KFANVERSE
         </div>
-        <nav>
-            <ul>
-                <li>HOME</li>
-                <li>UPDATES</li>
-                <li>QUIZZES</li>
-                <li>DISCUSSIONS</li>
-                <li>MERCHANDISE</li>
-                <li>ABOUT US</li>
-            </ul>
-        </nav>
+       <nav>
+    <ul>
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="updates.html">UPDATES</a></li>
+        <li><a href="quiz.html">QUIZZES</a></li>
+        <li><a href="discussions.html">DISCUSSIONS</a></li>
+        <li><a href="merch.html">MERCHANDISE</a></li>
+        <li><a href="about us.html">ABOUT US</a></li>
+    </ul>
+</nav>
+
         <div class="auth-buttons">
             <span class="search-icon">⚲</span>
             <button class="btn-login">LOGIN</button>
@@ -530,7 +543,7 @@
 <div class="main-content">
     <div class="container grid-layout">
         
-        <div class="block bg-lightblue">
+        <div class="block bg-lightpink">
             <div class="section-header"><h2>LATEST UPDATES</h2><a href="#" class="view-all">View All</a></div>
             <div class="updates-grid">
                 <div class="update-card">
@@ -552,7 +565,7 @@
             </div>
         </div>
 
-        <div class="block bg-lightyellow">
+        <div class="block bg-lightcream">
             <div class="section-header"><h2>TRENDING QUIZZES</h2><a href="#" class="view-all">View All</a></div>
             <div class="quiz-list">
                 <div class="quiz-item"><img src="Jeongyeon User.jfif" alt="Quiz"><div class="quiz-info"><h4>Which K-Pop Idol Are You?</h4><button class="btn-quiz">TAKE QUIZ</button></div></div>
@@ -561,7 +574,7 @@
             </div>
         </div>
 
-        <div class="block bg-lightblue">
+        <div class="block bg-lightpink">
             <div class="section-header"><h2>POPULAR DISCUSSIONS</h2><a href="#" class="view-all">View All</a></div>
             <div class="discussion-list">
                 <div class="discussion-item">
@@ -579,7 +592,7 @@
             </div>
         </div>
 
-        <div class="block bg-lightyellow">
+        <div class="block bg-lightcream">
             <div class="section-header"><h2>FEATURED MERCH</h2><a href="#" class="view-all">View All</a></div>
             <div class="merch-grid">
                 <div class="merch-item"><div class="merch-img-box"><img src="Momo User.jfif" alt="Lightstick"></div><h4>Product Name</h4><p>P999.99</p></div>

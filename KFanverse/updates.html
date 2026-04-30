@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KFANVERSE | Updates</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap');
+
+        :root {
+            --pink: #fce4ec;
+            --mint: #e0f2f1;
+            --cream: #fffbef;
+            --accent-pink: #ff80ab;
+            --accent-mint: #4db6ac;
+            --dark: #4a3b52;
+            --text-muted: #8c7b75;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to bottom, #fff8f9, #fdf6fb);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* ================= HEADER ================= */
+        header {
+            background: linear-gradient(to right, #fdf1f5, #e0f2f1, #fffbef);
+            border-bottom: 2px solid #e0f2f1;
+            padding: 20px 40px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            color: #795548;
+            letter-spacing: -1px;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 14px;
+            color: var(--text-muted);
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-pink);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .auth-buttons button {
+            padding: 8px 20px;
+            border-radius: 20px;
+            border: none;
+            font-weight: 800;
+            cursor: pointer;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+
+        .auth-buttons button:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+
+        .btn-login {
+            background: #80cbc4;
+            color: white;
+        }
+
+        .btn-signup {
+            background: #ff80ab;
+            color: white;
+        }
+
+        /* ================= PAGE CONTENT ================= */
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 40px 20px;
+        }
+
+        .page-title {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 900;
+            color: #d81b60;
+            margin-bottom: 30px;
+        }
+
+        /* TABS */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            gap: 10px;
+        }
+
+        .tab {
+            padding: 12px 25px;
+            font-weight: 900;
+            cursor: pointer;
+            background: var(--cream);
+            border-radius: 20px;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .tab:hover {
+            border-color: var(--accent-pink);
+        }
+
+        .tab.active {
+            background: var(--accent-pink);
+            color: white;
+        }
+
+        /* LAYOUT */
+        .layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+
+        /* NEWS CARD */
+        .news-card {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            background: white; /* Cleaner background */
+            background: linear-gradient(135deg, #f5fdfd, #fff0f5);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .news-card:hover {
+            transform: scale(1.02);
+        }
+
+        .news-img {
+            width: 180px;
+            height: 110px;
+            background: #eee;
+            border-radius: 10px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #aaa;
+        }
+
+        .news-content h3 {
+            font-weight: 900;
+            margin-bottom: 8px;
+            color: #4a3b52;
+        }
+
+        .news-content p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .meta {
+            font-size: 13px;
+            font-weight: 700;
+            color: #888;
+        }
+
+        .read-more {
+            color: #d81b60;
+            font-weight: 900;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .read-more:hover {
+            text-decoration: underline;
+        }
+
+        /* SIDEBAR */
+        .sidebar-box {
+            background: var(--cream);
+            border-radius: 15px;
+            margin-bottom: 20px;
+            padding: 20px;
+            border: 1px solid #f0e6cc;
+        }
+
+        .sidebar-box h3 {
+            margin-bottom: 15px;
+            color: #d81b60;
+            font-size: 18px;
+            font-weight: 900;
+        }
+
+        .sidebar-box ul {
+            list-style: none;
+        }
+
+        .sidebar-box li {
+            margin-bottom: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .sidebar-box li:hover {
+            color: var(--accent-pink);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .layout {
+                grid-template-columns: 1fr;
+            }
+
+            .news-card {
+                flex-direction: column;
+            }
+
+            .news-img {
+                width: 100%;
+                height: 180px;
+            }
+
+            header {
+                padding: 20px;
+            }
+
+            nav ul {
+                display: none; /* Usually hide full nav on mobile or use a burger menu */
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="header-content">
+        <div class="logo">KFANVERSE</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="updates.html">UPDATES</a></li>
+                <li><a href="quiz.html">QUIZZES</a></li>
+                <li><a href="discussions.html">DISCUSSIONS</a></li>
+                <li><a href="merch.html">MERCHANDISE</a></li>
+                <li><a href="about us.html">ABOUT US</a></li>
+            </ul>
+        </nav>
+        <div class="auth-buttons">
+            <button class="btn-login">LOGIN</button>
+            <button class="btn-signup">SIGN UP</button>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <div class="page-title">UPDATES</div>
+
+    <div class="tabs">
+        <div class="tab active">LATEST NEWS</div>
+        <div class="tab">TRENDING</div>
+    </div>
+
+    <div class="layout">
+        <main>
+            <div class="news-card">
+                <div class="news-img">IMAGE HOLDER</div>
+                <div class="news-content">
+                    <h3>New Comeback Released</h3>
+                    <p>The latest single has topped the charts within minutes of release. Fans are praising the new concept...</p>
+                    <div class="meta">1hr ago • <span class="read-more">Read More</span></div>
+                </div>
+            </div>
+
+            <div class="news-card">
+                <div class="news-img">IMAGE HOLDER</div>
+                <div class="news-content">
+                    <h3>World Tour Announced</h3>
+                    <p>Official dates for the upcoming "Galaxy Tour" have been revealed for 15 major cities...</p>
+                    <div class="meta">3hr ago • <span class="read-more">Read More</span></div>
+                </div>
+            </div>
+        </main>
+
+        <aside>
+            <div class="sidebar-box">
+                <h3>CATEGORIES</h3>
+                <ul>
+                    <li>All</li>
+                    <li>Comeback</li>
+                    <li>Rumors</li>
+                    <li>Concerts</li>
+                </ul>
+            </div>
+
+            <div class="sidebar-box">
+                <h3>TRENDING NOW</h3>
+                <ul>
+                    <li>1. New MV Released</li>
+                    <li>2. Idol Scandal</li>
+                    <li>3. Award Winners</li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+</div>
+
+</body>
+</html>
