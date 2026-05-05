@@ -3,26 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KFANVERSE | Updates</title>
+<title>KFANVERSE | Quizzes</title>
 <link rel="icon" type="image/jfif" href="pics/logo.jfif">
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap');
 
 :root {
-    --pink: #ffd6e7;
-    --mint: #d7f5f0;
-    --lavender: #efe4ff;
-    --cream: #fff7e6;
-
-    --accent-pink: #ff7aa2;
-    --accent-mint: #52c7b8;
-    --accent-lav: #b39ddb;
-
-    --text: #4e3d4a;
-    --muted: #7a6b74;
+    --pink: #ff4f93;
+    --mint: #19c7a6;
+    --lav: #8a6cff;
+    --text: #2b2230;
+    --muted: #6b5a70;
 }
 
+/* ================= RESET ================= */
 * {
     margin: 0;
     padding: 0;
@@ -51,7 +46,112 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-/* ================= HEADER (KEEP THIS ONLY) ================= */
+/* ================= PAGE ================= */
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 40px 20px;
+}
+
+.page-title {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 900;
+    margin-bottom: 35px;
+    color: var(--pink);
+}
+
+/* ================= GRID ================= */
+.quiz-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 22px;
+}
+
+/* ================= CARD ================= */
+.quiz-card {
+    border-radius: 22px;
+    overflow: hidden;
+    background: white;
+    border: 2px solid rgba(255, 79, 147, 0.15);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    transition: 0.25s ease;
+    position: relative;
+}
+
+.quiz-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(255, 79, 147, 0.25);
+    border-color: var(--pink);
+}
+
+/* IMAGE */
+.quiz-img {
+    width: 100%;
+    height: 190px;
+    overflow: hidden;
+    position: relative;
+}
+
+.quiz-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+/* LOCK OVERLAY */
+.quiz-card.locked .quiz-img::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+}
+
+/* INFO */
+.quiz-info {
+    padding: 16px;
+    text-align: center;
+    background: linear-gradient(to top, #ffffff, #fff7fb);
+}
+
+.quiz-info h3 {
+    font-weight: 900;
+    font-size: 15px;
+    margin-bottom: 6px;
+}
+
+.quiz-info p {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 12px;
+}
+
+/* BUTTON */
+.btn-take-quiz {
+    display: block;
+    padding: 12px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--mint), var(--pink));
+    color: white;
+    font-weight: 900;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.btn-take-quiz:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+/* DISABLED */
+.disabled {
+    background: #ddd !important;
+    color: #777 !important;
+    cursor: not-allowed;
+}
+
 header {
     display: flex;
     justify-content: space-between;
@@ -88,30 +188,42 @@ header {
     border-radius: 50%;
 }
 
-/* NAV */
+/* NAV CENTER */
 nav ul {
     display: flex;
-    gap: 25px;
-    font-weight: 800;
-    font-size: 14px;
-    color: #8c7b75;
+    gap: 28px;
     list-style: none;
+    align-items: center;
 }
 
 nav ul li a {
     text-decoration: none;
-    color: inherit;
+    font-weight: 800;
+    font-size: 14px;
+    color: #777;
+    position: relative;
+    transition: 0.2s;
 }
 
-nav ul li a.active {
-    color: #ff7aa2;
-    font-weight: 900;
-    border-bottom: 2px solid #ff7aa2;
-    padding-bottom: 3px;
-}
-
+/* HOVER */
 nav ul li a:hover {
-    color: #80cbc4;
+    color: #ff4f93;
+}
+
+/* ACTIVE (PINK UNDERLINE LIKE IMAGE) */
+nav ul li a.active {
+    color: #ff4f93;
+}
+
+nav ul li a.active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 2px;
+    background: #ff4f93;
+    border-radius: 5px;
 }
 
 /* RIGHT SIDE */
@@ -123,59 +235,16 @@ nav ul li a:hover {
 
 /* SEARCH */
 .search-btn {
-    background: transparent;
     border: none;
+    background: transparent;
+    font-size: 20px;
     cursor: pointer;
-    font-size: 22px;
     color: #4db6ac;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
     transition: 0.2s;
 }
 
 .search-btn:hover {
-    transform: scale(1.15);
-    color: #00897b;
-}
-
-/* AUTH BUTTONS */
-.auth-buttons {
-    display: flex;
-    gap: 12px;
-}
-
-.auth-buttons button {
-    padding: 8px 22px;
-    border-radius: 25px;
-    border: none;
-    font-weight: 800;
-    font-size: 13px;
-    cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    letter-spacing: 0.5px;
-    transition: all 0.2s ease;
-}
-
-/* LOGIN */
-.btn-login {
-    background-color: #80cbc4;
-    color: white;
-}
-
-.btn-login:hover {
-    background-color: #4db6ac;
-}
-
-/* SIGNUP */
-.btn-signup {
-    background-color: #ff80ab;
-    color: white;
-}
-
-.btn-signup:hover {
-    background-color: #d81b60;
+    transform: scale(1.1);
 }
 
 /* USER ICON */
@@ -189,229 +258,6 @@ nav ul li a:hover {
     border-radius: 50%;
     cursor: pointer;
 }
-
-/* ================= MAIN CONTAINER ================= */
-.container {
-    max-width: 1150px;
-    margin: 40px auto;
-    padding: 35px 25px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.55), rgba(255,255,255,0.35));
-    backdrop-filter: blur(8px);
-    border-radius: 28px;
-    box-shadow: 0 20px 50px rgba(255, 122, 162, 0.12);
-}
-
-/* TITLE */
-.page-title {
-    text-align: center;
-    font-size: 34px;
-    font-weight: 900;
-    color: var(--accent-pink);
-    margin-bottom: 25px;
-}
-
-/* TABS */
-.tabs {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin-bottom: 35px;
-}
-
-.tab {
-    padding: 11px 22px;
-    font-weight: 900;
-    cursor: pointer;
-    border-radius: 999px;
-    background: linear-gradient(135deg, var(--cream), var(--mint));
-    color: var(--text);
-    transition: 0.3s;
-}
-
-.tab:hover {
-    transform: translateY(-2px);
-}
-
-.tab.active {
-    background: linear-gradient(135deg, var(--accent-pink), var(--accent-lav));
-    color: white;
-}
-
-/* CONTENT */
-.tab-content {
-    display: none;
-    animation: fade 0.3s ease;
-}
-
-.tab-content.active {
-    display: block;
-}
-
-@keyframes fade {
-    from { opacity: 0; transform: translateY(5px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* LAYOUT */
-.layout {
-    display: grid;
-    grid-template-columns: 2.2fr 0.8fr;
-    gap: 50px;
-}
-
-/* NEWS CARD */
-.news-card {
-    display: flex;
-    gap: 18px;
-    padding: 18px;
-    border-radius: 18px;
-    margin-bottom: 18px;
-    background: linear-gradient(135deg, #fff6fa, #f2fffd, #f8f4ff);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-    transition: 0.3s ease;
-}
-
-.news-card:hover {
-    transform: translateY(-5px);
-}
-
-.news-img {
-    width: 170px;
-    height: 110px;
-    border-radius: 14px;
-    overflow: hidden;
-}
-
-.news-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.news-link {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-}
-
-.news-link:hover {
-    text-decoration: none;
-}
-
-.news-content p {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 10px;
-    font-style: italic;
-}
-
-.meta {
-    font-size: 12px;
-    font-weight: 800;
-    color: #9a8b93;
-}
-
-/* SIDEBAR */
-.sidebar-box {
-    background: linear-gradient(135deg, var(--cream), var(--pink), var(--mint));
-    border-radius: 18px;
-    padding: 18px;
-    margin-bottom: 18px;
-    box-shadow: 0 8px 20px rgba(255, 122, 162, 0.08);
-}
-
-.sidebar-box h3 {
-    margin-bottom: 12px;
-    color: var(--accent-pink);
-    font-weight: 900;
-}
-
-.sidebar-list li {
-    list-style: none;
-    padding: 8px 10px;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: 0.25s;
-}
-
-.sidebar-list li:hover {
-    background: var(--accent-pink);
-    color: white;
-    transform: translateX(6px);
-}
-
-/* RESPONSIVE */
-@media (max-width: 900px) {
-    .layout {
-        grid-template-columns: 1fr;
-    }
-
-    .news-card {
-        flex-direction: column;
-    }
-
-    .news-img {
-        width: 100%;
-        height: 180px;
-    }
-}
-
-/* ================= AUTH AREA (HEADER) ================= */
-.auth-buttons {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.auth-buttons button {
-    padding: 8px 22px;
-    border-radius: 25px;
-    border: none;
-    font-weight: 800;
-    font-size: 13px;
-    cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    letter-spacing: 0.5px;
-    transition: all 0.2s ease;
-}
-
-/* LOGIN */
-.btn-login {
-    background-color: #80cbc4;
-    color: white;
-}
-
-.btn-login:hover {
-    background-color: #4db6ac;
-    transform: translateY(-1px);
-}
-
-/* SIGNUP */
-.btn-signup {
-    background-color: #ff80ab;
-    color: white;
-}
-
-.btn-signup:hover {
-    background-color: #d81b60;
-    transform: translateY(-1px);
-}
-
-/* USER ICON */
-#userIcon {
-    display: none;
-}
-
-#userIcon img {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    object-fit: cover;
-    cursor: pointer;
-}
-
 /* --- OVERLAY --- */
 .overlay {
     display: none;
@@ -634,6 +480,44 @@ nav ul li a:hover {
     font-weight: 700;
 }
 
+/* AUTH BUTTONS */
+.auth-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.auth-buttons button {
+    padding: 8px 22px;
+    border-radius: 25px;
+    border: none;
+    font-weight: 800;
+    font-size: 13px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
+}
+
+/* LOGIN */
+.btn-login {
+    background-color: #80cbc4;
+    color: white;
+}
+
+.btn-login:hover {
+    background-color: #4db6ac;
+}
+
+/* SIGNUP */
+.btn-signup {
+    background-color: #ff80ab;
+    color: white;
+}
+
+.btn-signup:hover {
+    background-color: #d81b60;
+}
+
 .auth-info-text {
     position: absolute;
     top: 18px;
@@ -684,17 +568,16 @@ nav ul li a:hover {
             KFANVERSE
         </div>
 
-        <!-- NAVIGATION -->
-        <nav>
-            <ul>
-    <li><a href="index.html">HOME</a></li>
-    <li><a href="updates.html" class="active">UPDATES</a></li>
-    <li><a href="quiz.html">QUIZZES</a></li>
-    <li><a href="discussions.html">DISCUSSIONS</a></li>
-    <li><a href="merch.html">MERCHANDISE</a></li>
-    <li><a href="index.html#about">ABOUT US</a></li>
-</ul>
-        </nav>
+       <nav>
+    <ul>
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="updates.html">UPDATES</a></li>
+        <li><a href="quiz.html" class="active">QUIZZES</a></li>
+        <li><a href="discussions.html">DISCUSSIONS</a></li>
+        <li><a href="merch.html">MERCHANDISE</a></li>
+        <li><a href="index.html#about">ABOUT US</a></li>
+    </ul>
+</nav>
 
         <!-- RIGHT SIDE -->
         <div class="header-right">
@@ -702,7 +585,7 @@ nav ul li a:hover {
             <!-- SEARCH -->
             <button class="search-btn" onclick="handleSearch()">🔍</button>
 
-            <!-- LOGIN / SIGNUP -->
+           <!-- LOGIN / SIGNUP -->
             <div class="auth-buttons">
                 <button class="btn-login" onclick="openLogin(); showLogin()">LOGIN</button>
                 <button class="btn-signup" onclick="openLogin(); showSignup()">SIGN UP</button>
@@ -718,6 +601,100 @@ nav ul li a:hover {
         </div>
     </div>
 </header>
+
+<div class="container">
+
+<div class="page-title">QUIZZES</div>
+
+<div class="quiz-grid">
+
+    <!-- 1 -->
+<div class="quiz-card">
+    <div class="quiz-img">
+        <img src="pics/q1.jfif">
+    </div>
+
+    <div class="quiz-info">
+        <h3>WHICH TWICE MEMBER ARE YOU?</h3>
+        <p>Personality Quiz • 20 Questions</p>
+
+        <a href="https://www.quizexpo.com/which-twice-member-are-you-quiz/"
+           target="_blank"
+           class="btn-take-quiz">
+            TAKE QUIZ
+        </a>
+    </div>
+</div>
+
+<!-- 2 -->
+<div class="quiz-card">
+    <div class="quiz-img">
+        <img src="pics/q2.jfif">
+    </div>
+
+    <div class="quiz-info">
+        <h3>GUESS THE LIGHTSTICK</h3>
+        <p>K-pop Knowledge Quiz • 22 Questions</p>
+
+        <a href="https://www.quotev.com/quiz/12318075/Guess-the-K-pop-group-by-the-lightstick-UPDATED"
+           target="_blank"
+           class="btn-take-quiz">
+            TAKE QUIZ
+        </a>
+    </div>
+</div>
+
+    <!-- 3 (LOCKED) -->
+    <div class="quiz-card locked">
+        <div class="quiz-img">
+            <img src="pics/q3.jfif">
+        </div>
+        <div class="quiz-info">
+            <h3>MV SCENE CHALLENGE</h3>
+            <p>COMING SOON</p>
+            <button class="btn-take-quiz disabled" disabled>LOCKED</button>
+        </div>
+    </div>
+
+    <!-- 4 (LOCKED) -->
+    <div class="quiz-card locked">
+        <div class="quiz-img">
+            <img src="pics/q4.jpg">
+        </div>
+        <div class="quiz-info">
+            <h3>GUESS THE MEMBER</h3>
+            <p>COMING SOON</p>
+            <button class="btn-take-quiz disabled" disabled>LOCKED</button>
+        </div>
+    </div>
+
+    <!-- 5 (LOCKED) -->
+    <div class="quiz-card locked">
+        <div class="quiz-img">
+            <img src="pics/q5.jpg">
+        </div>
+        <div class="quiz-info">
+            <h3>K-POP LYRICS QUIZ</h3>
+            <p>COMING SOON</p>
+            <button class="btn-take-quiz disabled" disabled>LOCKED</button>
+        </div>
+    </div>
+
+    <!-- 6 (LOCKED) -->
+    <div class="quiz-card locked">
+        <div class="quiz-img">
+            <img src="pics/q6.jpg">
+        </div>
+        <div class="quiz-info">
+            <h3>IDOL EMOJI GAME</h3>
+            <p>COMING SOON</p>
+            <button class="btn-take-quiz disabled" disabled>LOCKED</button>
+        </div>
+    </div>
+
+</div>
+
+</div>
 
 <div id="loginOverlay" class="overlay">
 <div class="auth-info-text">
@@ -737,14 +714,14 @@ nav ul li a:hover {
 </div>
     <div class="auth-card">
 
-         <div class="auth-tabs">
+        <!-- CLOSE BUTTON -->
+        <button class="close-modal" onclick="closeLogin()">×</button>
+
+        <!-- TABS -->
+        <div class="auth-tabs">
     <div class="auth-tab active" onclick="showLogin(this)">LOGIN</div>
     <div class="auth-tab" onclick="showSignup(this)">SIGN UP</div>
-   
-
-
-    <button class="close-modal" onclick="closeLogin()">×</button>
-</div>
+        </div>
 
         <div class="auth-body">
 
@@ -837,158 +814,25 @@ nav ul li a:hover {
     </div>
 </div>
 
-<div class="container">
 
-<div class="page-title">UPDATES</div>
 
-<div class="tabs">
-<div class="tab active" data-tab="latest">LATEST NEWS</div>
-<div class="tab" data-tab="trending">TRENDING</div>
-</div>
-
-<div class="layout">
-
-<main>
-
-<div class="tab-content active" id="latest">
-
-<a href="https://kbizoom.com/kpop-phenomenon-project-hybe-sm-jyp-yg/" class="news-link">
-<div class="news-card">
-<div class="news-img"><img src="pics/news1.jpg"></div>
-<div class="news-content">
-<h3>SM, YG, JYP, HYBE Join Forces for Mega Festival Aiming Beyond Coachella</h3>
-<p>HYBE, SM, JYP, and YG unite to launch a global K-pop festival "Phenomenon," aiming to surpass Coachella and redefine the music industry.</p>
-<div class="meta">16 April, 2026 • by admin</div>
-</div>
-</div>
-</a>
-
-<a href="https://kbizoom.com/jypark-resigns-jyp-director-focus-popular-culture-exchange-role/" class="news-link">
-<div class="news-card">
-<div class="news-img"><img src="pics/news2.png"></div>
-<div class="news-content">
-<h3>J.Y. Park Steps Down as JYP Director After Meeting Xi Jinping</h3>
-<p>J.Y. Park resigns as JYP Entertainment's internal director to focus on global K-culture initiatives.</p>
-<div class="meta">11 March, 2026 • by admin</div>
-</div>
-</div>
-</a>
-
-<a href="https://kbizoom.com/jay-park-2pm-controversy-apology/" class="news-link">
-<div class="news-card">
-<div class="news-img"><img src="pics/news3.jpg"></div>
-<div class="news-content">
-<h3>Jay Park First Speaks About 2PM Exit 16 Years Ago</h3>
-<p>Jay Park addresses the 2009 controversy, reflecting on his departure from 2PM and life afterward.</p>
-<div class="meta">6 March, 2026 • by tuleconghoa</div>
-</div>
-</div>
-</a>
-
-<a href="https://kbizoom.com/next-kpop-star-big-3-yg-sm-hybe-2026/" class="news-link">
-<div class="news-card">
-<div class="news-img"><img src="pics/news4.jpg"></div>
-<div class="news-content">
-<h3>Who Will Be the Next K-Pop Global Star?</h3>
-<p>YG, SM, and HYBE ramp up auditions as they search for the next global K-pop stars.</p>
-<div class="meta">17 February, 2026 • by tuleconghoa</div>
-</div>
-</div>
-</a>
-
-<a href="https://kbizoom.com/kpop-big-4-rookie-debut-plans-2026-hybe-sm-jyp-yg/" class="news-link">
-<div class="news-card">
-<div class="news-img"><img src="pics/news5.jpg"></div>
-<div class="news-content">
-<h3>Welcome 2026: Big 4 Rookie Debut Plans</h3>
-<p>HYBE, SM, JYP, and YG prepare new rookie launches for 2026 lineup expansion.</p>
-<div class="meta">3 January, 2026 • by thaongoc</div>
-</div>
-</div>
-</a>
-
-</div>
-
-<div class="tab-content" id="trending">
-
-<a href="https://kbizoom.com/next-kpop-star-big-3-yg-sm-hybe-2026/" class="news-link">
-<div class="news-card">
-<div class="news-img"><img src="pics/news4.jpg"></div>
-<div class="news-content">
-<h3>Who Will Be the Next K-Pop Global Star?</h3>
-<p>YG, SM, and HYBE ramp up auditions as they search for the next global K-pop stars.</p>
-<div class="meta">17 February, 2026 • by tuleconghoa</div>
-</div>
-</div>
-</a>
-
-<a href="https://kbizoom.com/kpop-big-4-rookie-debut-plans-2026-hybe-sm-jyp-yg/" class="news-link">
-<div class="news-card">
-<div class="news-img"><img src="pics/news5.jpg"></div>
-<div class="news-content">
-<h3>Welcome 2026: Big 4 Rookie Debut Plans</h3>
-<p>HYBE, SM, JYP, and YG prepare new rookie launches for 2026 lineup expansion.</p>
-<div class="meta">3 January, 2026 • by thaongoc</div>
-</div>
-</div>
-</a>
-
-</div>
-
-</main>
-
-<aside style="position: sticky; top: 20px; height: fit-content;">
-<div class="sidebar-box">
-<h3>CATEGORIES</h3>
-<ul class="sidebar-list">
-<li>All</li>
-<li>Comeback</li>
-<li>Rumors</li>
-<li>Concerts</li>
-</ul>
-</div>
-
-<div class="sidebar-box">
-<h3>TRENDING NOW</h3>
-<ul class="sidebar-list">
-<li>New MV Released</li>
-<li>Idol Scandal</li>
-<li>Award Winners</li>
-</ul>
-</div>
-
-</aside>
-
-</aside>
-
-</div>
-</div>
 
 <script>
-/* =============================
-   AUTH STATE (RUN ON LOAD + SYNC)
-============================= */
-
-document.addEventListener("DOMContentLoaded", () => {
-    updateAuthState();
-    initForms();
-    initTabs();
-});
-
-window.addEventListener("storage", updateAuthState);
-
-
-/* =============================
-   AUTH CORE
+    /* =============================
+    LOGIN / SIGNUP ACTION 
+    (Keep this version, it has the username logic!)
 ============================= */
 
 function login() {
-    const username = document.querySelector("#loginForm input[type='text']")?.value.trim() || "User";
+    // 1. Get the username from the login input
+    const usernameInput = document.querySelector("#loginForm input[type='text']");
+    const username = usernameInput ? usernameInput.value : "ONCE_USER";
 
+    // 2. Save data to localStorage
     localStorage.setItem("isLoggedIn", "true");
     localStorage.setItem("userName", username);
-    localStorage.setItem("userHandle", username);
-
+    
+    // Set a default profile pic if none exists
     if (!localStorage.getItem("userAvatar")) {
         localStorage.setItem("userAvatar", "pics/MomoUser.jfif");
     }
@@ -998,26 +842,23 @@ function login() {
 }
 
 function signup() {
-    const username = document.querySelector("#signupForm input[type='text']")?.value.trim() || "User";
+    // 1. Get the username from the signup input
+    const usernameInput = document.querySelector("#signupForm input[type='text']");
+    const username = usernameInput ? usernameInput.value : "ONCE_USER";
 
+    // 2. Save data to localStorage
     localStorage.setItem("isLoggedIn", "true");
     localStorage.setItem("userName", username);
-    localStorage.setItem("userHandle", username);
+    
+    // Set a default profile pic for new signups
     localStorage.setItem("userAvatar", "pics/MomoUser.jfif");
 
     updateAuthState();
     closeLogin();
 }
 
-function logoutUser() {
-    localStorage.removeItem("isLoggedIn");
-    updateAuthState();
-    window.location.href = "index.html";
-}
-
-
 /* =============================
-   AUTH UI STATE
+    AUTH STATE (SYMBOLS & PICS)
 ============================= */
 
 function updateAuthState() {
@@ -1026,112 +867,93 @@ function updateAuthState() {
     const userIconWrapper = document.getElementById("userIcon");
     const userIconImg = document.querySelector("#userIcon img");
 
-    const avatar = localStorage.getItem("userAvatar") || "pics/MomoUser.jfif";
-
     if (isLoggedIn === "true") {
         if (authButtons) authButtons.style.display = "none";
         if (userIconWrapper) userIconWrapper.style.display = "block";
-        if (userIconImg) userIconImg.src = avatar;
+        
+        // Sync the mini icon with the saved profile picture
+        const savedPic = localStorage.getItem("userAvatar");
+        if (userIconImg && savedPic) {
+            userIconImg.src = savedPic;
+        }
     } else {
         if (authButtons) authButtons.style.display = "flex";
         if (userIconWrapper) userIconWrapper.style.display = "none";
     }
 }
 
-
 /* =============================
-   FORM INIT (CLEAN SINGLE SOURCE)
+    OPEN / CLOSE MODAL
 ============================= */
 
-function initForms() {
-    const loginForm = document.getElementById("loginForm");
-    const signupForm = document.getElementById("signupForm");
+function openLogin() {
+    document.getElementById("loginOverlay").style.display = "flex";
+    showLogin();
+}
 
-    if (loginForm) {
-        loginForm.addEventListener("submit", (e) => {
+function openSignup() {
+    document.getElementById("loginOverlay").style.display = "flex";
+    showSignup();
+}
+
+function closeLogin() {
+    document.getElementById("loginOverlay").style.display = "none";
+}
+
+/* =============================
+    SWITCH FORMS
+============================= */
+
+function showLogin() {
+    document.getElementById("loginForm").style.display = "block";
+    document.getElementById("signupForm").style.display = "none";
+}
+
+function showSignup() {
+    document.getElementById("loginForm").style.display = "none";
+    document.getElementById("signupForm").style.display = "block";
+}
+
+/* =============================
+    FORM EVENTS
+============================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+    updateAuthState();
+
+    const lForm = document.getElementById("loginForm");
+    const sForm = document.getElementById("signupForm");
+
+    if(lForm) {
+        lForm.addEventListener("submit", (e) => {
             e.preventDefault();
             login();
         });
     }
 
-    if (signupForm) {
-        signupForm.addEventListener("submit", (e) => {
+    if(sForm) {
+        sForm.addEventListener("submit", (e) => {
             e.preventDefault();
             signup();
         });
     }
-}
-
-
-/* =============================
-   MODAL CONTROLS
-============================= */
-
-function openLogin() {
-    const overlay = document.getElementById("loginOverlay");
-    if (overlay) overlay.style.display = "flex";
-}
-
-function closeLogin() {
-    const overlay = document.getElementById("loginOverlay");
-    if (overlay) overlay.style.display = "none";
-}
-
-function showLogin() {
-    const login = document.getElementById("loginForm");
-    const signup = document.getElementById("signupForm");
-
-    if (login) login.style.display = "block";
-    if (signup) signup.style.display = "none";
-}
-
-function showSignup() {
-    const login = document.getElementById("loginForm");
-    const signup = document.getElementById("signupForm");
-
-    if (login) login.style.display = "none";
-    if (signup) signup.style.display = "block";
-}
-
+});
 
 /* =============================
-   TAB SYSTEM
-============================= */
-
-function initTabs() {
-    document.querySelectorAll(".tab").forEach(tab => {
-        tab.addEventListener("click", () => {
-            const targetId = tab.getAttribute("data-tab");
-
-            document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-            document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
-
-            tab.classList.add("active");
-
-            const target = document.getElementById(targetId);
-            if (target) target.classList.add("active");
-        });
-    });
-}
-
-
-/* =============================
-   SEARCH
+    SEARCH
 ============================= */
 
 function handleSearch() {
     let query = prompt("Search KFanverse navigation:");
     if (!query) return;
-
     query = query.toLowerCase();
 
     const routes = {
-        home: "index.html",
-        update: "updates.html",
-        quiz: "quiz.html",
-        discussion: "discussions.html",
-        merch: "merch.html",
-        about: "about.html"
+        "home": "index.html",
+        "update": "updates.html",
+        "quiz": "quiz.html",
+        "discussion": "discussions.html",
+        "merch": "merch.html"
     };
 
     for (let key in routes) {
@@ -1140,30 +962,23 @@ function handleSearch() {
             return;
         }
     }
-
     alert("No results found 😢");
 }
 
-
 /* =============================
-   HASH SCROLL
+    STORAGE SYNC & ANCHORS
 ============================= */
+
+window.addEventListener("storage", updateAuthState);
 
 window.addEventListener("load", () => {
     if (window.location.hash) {
         const target = document.querySelector(window.location.hash);
-        if (target) target.scrollIntoView({ behavior: "smooth" });
+        if (target) {
+            target.scrollIntoView({ behavior: "smooth" });
+        }
     }
 });
-
-
-/* =============================
-   EXTRA SAFETY
-============================= */
-
-function closeAuth() {
-    closeLogin();
-}
 
 function showLogin(el = document.querySelector(".auth-tab")) {
     // switch tab highlight
@@ -1213,7 +1028,5 @@ document.getElementById("loginForm").addEventListener("submit", (e) => {
     closeLogin();
 });
 </script>
-
-
 </body>
 </html>
