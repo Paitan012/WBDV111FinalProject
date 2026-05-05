@@ -1,0 +1,65 @@
+/* =============================
+   HARD DARK MODE FIX (NO WHITE BG ANYWHERE)
+============================= */
+
+/* kill all white backgrounds from Tailwind */
+.bg-white,
+table,
+thead,
+tbody,
+tr,
+th,
+td {
+    background: transparent !important;
+}
+
+/* main panels/cards */
+.card-kawaii,
+.bg-white,
+.bg-gray-50,
+.bg-gray-100 {
+    background: var(--bg-card) !important;
+    border: 1px solid rgba(255,255,255,0.08) !important;
+    border-radius: 18px !important;
+}
+
+/* TABLES (fully dark) */
+table {
+    width: 100%;
+    background: var(--bg-card) !important;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+thead {
+    background: rgba(255,255,255,0.03) !important;
+    color: var(--accent-mint) !important;
+}
+
+tbody tr {
+    background: transparent !important;
+}
+
+tbody tr:hover {
+    background: rgba(255, 126, 185, 0.05) !important;
+}
+
+/* borders softer */
+th, td {
+    border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+}
+
+/* =============================
+   INPUTS (dark only)
+============================= */
+
+input,
+select {
+    background: var(--bg-card) !important;
+    border: 1px solid rgba(255,255,255,0.08) !important;
+    color: var(--text-main) !important;
+}
+
+input::placeholder {
+    color: var(--text-muted);
+}

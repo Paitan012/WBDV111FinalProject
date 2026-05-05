@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KFANVERSE</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="icon" type="image/jfif" href="pics/logo.jfif">
+    <script>
+    if (!localStorage.getItem("hasVisited")) {
+        document.documentElement.classList.add("show-loader");
+    }
+</script>
+    
+    
+</head>
+<body>
+   <div id="loader">
+    <audio id="opening-audio" src="Opening.mp3" preload="auto"></audio>
+
+    <div class="loader-container">
+        <img src="pics/lovely.png" alt="Loading..." class="loader-logo">
+        <h1 class="loader-title">KFanverse <span>✨</span></h1>
+        <p class="loader-quote">"Chasing dreams and high notes with you."</p>
+
+        <div class="loading-dots">
+            <span>❤</span><span>❤</span><span>❤</span>
+        </div>
+
+        <button id="start-btn">Enter the Verse ✨</button>
+    </div>
+</div>
+
+<div id="main-content" style="display:none;">
+    <audio id="hp-audio" src="hp.mp3" loop preload="auto"></audio>
+    
+    </div>
+
+<header>
+
+<div id="loginOverlay" class="overlay">
+<div class="auth-info-text">
+
+    <div class="auth-info-col">
+        <p><strong>Admin Access</strong></p>
+        <p>Email: admin123@gmail.com</p>
+        <p>Password: admin123</p>
+    </div>
+
+    <div class="auth-info-col">
+        <p><strong>Super Admin Access</strong></p>
+        <p>Email: sadmin123@gmail.com</p>
+        <p>Password: sadmin123</p>
+    </div>
+
+</div>
+    <div class="auth-card">
+
+        <!-- CLOSE BUTTON -->
+        <button class="close-modal" onclick="closeLogin()">×</button>
+
+        <!-- TABS -->
+       <div class="auth-tabs">
+    <div class="auth-tab active" onclick="showLogin(this)">LOGIN</div>
+    <div class="auth-tab" onclick="showSignup(this)">SIGN UP</div>
+</div>
+
+        <div class="auth-body">
+
+            <!-- LOGIN FORM -->
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Email or Username</label>
+                    <input type="text" placeholder="Enter your email or username" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="Enter your password" required>
+                </div>
+
+                <div class="form-helpers">
+                    <label class="remember-me">
+                        <input type="checkbox"> Remember me
+                    </label>
+                    <a href="#" class="forgot-pass">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="btn-auth-submit">LOGIN</button>
+
+                <div class="auth-footer">
+                    Don't have an account?
+                    <span onclick="showSignup()" style="cursor:pointer; text-decoration: underline;">
+                        Sign up
+                    </span>
+                </div>
+            </form>
+
+           <form id="signupForm" style="display:none;">
+
+    <div class="form-group">
+        <label>Username</label>
+        <input type="text" placeholder="Enter username" required>
+    </div>
+
+    <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="Enter email" required>
+    </div>
+
+    <div class="form-group">
+        <label>Password</label>
+        <input type="password" placeholder="Create password" required>
+    </div>
+
+    <div class="form-group">
+        <label>Confirm Password</label>
+        <input type="password" placeholder="Confirm password" required>
+    </div>
+
+    <!-- TERMS -->
+    <div class="terms-box">
+        <div class="terms-title">Terms of Agreement</div>
+
+        <p class="terms-text">
+            By creating an account, you agree to follow the community rules:
+        </p>
+
+        <ul class="terms-list">
+            <li>Respect all users and content</li>
+            <li>No spam or harmful behavior</li>
+            <li>Your data is used for account purposes only</li>
+        </ul>
+
+        <label class="terms-check">
+            <input type="checkbox" required>
+            I agree to the Terms & Privacy Policy
+        </label>
+    </div>
+
+    <!-- SPACED BUTTON AREA -->
+    <div style="margin-top: 18px;">
+        <button type="submit" class="btn-auth-submit">SIGN UP</button>
+    </div>
+
+    <div class="auth-footer" style="margin-top: 12px;">
+        Already have an account?
+        <span onclick="showLogin()" style="cursor:pointer; text-decoration: underline;">
+            Login
+        </span>
+    </div>
+
+</form>
+
+        </div>
+    </div>
+</div>
+
+    <div class="header-content">
+        <div class="logo">
+            <img src="pics/logo.jfif" alt="Logo">
+            KFANVERSE
+        </div>
+       <nav>
+    <ul>
+        <li><a href="index.html" class="active">HOME</a></li>
+        <li><a href="updates.html">UPDATES</a></li>
+        <li><a href="quiz.html">QUIZZES</a></li>
+        <li><a href="discussions.html">DISCUSSIONS</a></li>
+        <li><a href="merch.html">MERCHANDISE</a></li>
+        <li><a href="#about">ABOUT US</a></li>
+    </ul>
+</nav>
+
+<div class="header-right">
+
+    <button class="search-btn" onclick="handleSearch()">🔍</button>
+
+    <div class="auth-buttons">
+        <button class="btn-login" onclick="openLogin(); showLogin()">LOGIN</button>
+        <button class="btn-signup" onclick="openLogin(); showSignup()">SIGN UP</button>
+    </div>
+
+    <div id="userIcon">
+        <a href="profile.html">
+            <img src="pics/Momo User.jfif" class="user-icon">
+        </a>
+    </div>
+
+</div>
+</header>
+
+<div class="hero-container">
+    <div class="container">
+        <section class="hero" id="hero-section">
+            
+            <button class="carousel-btn btn-prev hero-btn-prev">
+                <div class="chevron"></div>
+            </button>
+
+            <div class="hero-img-wrapper">
+                <div class="image-track">
+                    <img src="pics/BB1.jfif" alt="Group Photo 1">
+                    <img src="pics/BB2.jfif" alt="Group Photo 2">
+                    <img src="pics/BB3.jfif" alt="Group Photo 3">
+                    <img src="pics/BB4.jfif" alt="Group Photo 4">
+                    <img src="pics/BB5.jfif" alt="Group Photo 5">
+                </div>
+            </div>
+
+            <div class="hero-text">
+    <p class="welcome">WELCOME TO</p>
+
+    <h1>KFANVERSE</h1>
+
+    <h4 class="edition-stamp">JYP EDITION!</h4>
+
+    <p class="desc">
+        Your Ultimate K-POP Universe!<br>
+        Updates, Quizzes, Discussions,<br>
+        Merch and many more!
+    </p>
+
+    <a href="#explore-section" class="btn-explore">EXPLORE NOW ✨</a>
+                
+                <div class="carousel-indicators">
+                    <div class="dot active"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+            </div>
+            
+            <button class="carousel-btn btn-next hero-btn-next">
+                <div class="chevron"></div>
+            </button>
+
+        </section>
+    </div>
+</div>
+
+<div class="main-content" id="explore-section">
+    <div class="container grid-layout">
+        
+       <div class="block bg-lightpink">
+    <div class="section-header">
+        <h2>LATEST UPDATES</h2>
+        <a href="updates.html" class="view-all">View All</a>
+    </div>
+
+    <div class="updates-grid">
+
+        <div class="update-card" onclick="openLink('https://kbizoom.com/kpop-phenomenon-project-hybe-sm-jyp-yg/')">
+    <img src="pics/news1.jpg" alt="K-pop Festival">
+    <span class="badge">NEWS</span>
+    <h3>Big 4 Join Forces for Global K-pop Festival</h3>
+    <p>SM, YG, JYP, and HYBE launch “Phenomenon,” aiming to surpass Coachella.</p>
+    <div class="time">Apr 16, 2026 • by admin</div>
+</div>
+
+       <div class="update-card" onclick="openLink('https://kbizoom.com/jypark-resigns-jyp-director-focus-popular-culture-exchange-role/')">
+    <img src="pics/news2.png" alt="JYP News">
+    <span class="badge">NEW</span>
+    <h3>J.Y. Park Steps Down as JYP Director</h3>
+    <p>JYP founder shifts focus to global K-culture projects after major leadership move.</p>
+    <div class="time">Mar 11, 2026 • by admin</div>
+</div>
+
+<div class="update-card" onclick="openLink('https://kbizoom.com/jay-park-2pm-controversy-apology/')">
+    <img src="pics/news3.jpg" alt="Jay Park">
+    <span class="badge">NEWS</span>
+    <h3>Jay Park Opens Up About 2PM Exit</h3>
+    <p>After 16 years, Jay Park reflects on the controversy and his sudden departure.</p>
+    <div class="time">Mar 6, 2026 • by tuleconghoa</div>
+</div>
+
+    </div>
+</div>
+
+       <div class="block bg-lightcream">
+    <div class="section-header">
+        <h2>TRENDING QUIZZES</h2>
+        <a href="quiz.html" class="view-all">View All</a>
+    </div>
+
+    <div class="quiz-list">
+
+        <!-- ACTIVE QUIZ -->
+        <div class="quiz-item">
+    <img src="pics/q1.jfif" alt="Quiz 1">
+
+    <div class="quiz-info">
+        <h4>WHICH TWICE MEMBER ARE YOU?</h4>
+
+        <a href="https://www.quizexpo.com/which-twice-member-are-you-quiz/"
+           target="_blank"
+           class="btn-quiz">
+            TAKE QUIZ
+        </a>
+    </div>
+</div>
+
+        <!-- LOCKED QUIZ -->
+        <div class="quiz-item">
+    <img src="pics/q2.jfif" alt="Quiz 2">
+
+    <div class="quiz-info">
+        <h4>GUESS THE LIGHTSTICK</h4>
+
+        <a href="https://www.quotev.com/quiz/12318075/Guess-the-K-pop-group-by-the-lightstick-UPDATED"
+           target="_blank"
+           class="btn-quiz">
+            TAKE QUIZ
+        </a>
+    </div>
+</div>
+
+        <!-- LOCKED QUIZ -->
+        <div class="quiz-item locked">
+            <img src="pics/q3.jfif" alt="Quiz 3">
+
+            <div class="quiz-info">
+                <h4>MV SCENE CHALLENGE</h4>
+                <button class="btn-quiz disabled" disabled style="opacity:0.5; cursor:not-allowed;">
+                    MAINTENANCE
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+        <div class="block bg-lightblue">
+    <div class="section-header">
+        <h2>POPULAR DISCUSSIONS</h2>
+        <a href="discussions.html" class="view-all">View All</a>
+    </div>
+
+    <div class="discussion-list" id="homeDiscussionList"></div>
+</div>
+
+
+      <div class="block bg-lightcreamm merch-featured">
+    <div class="section-header">
+        <h2>FEATURED MERCH</h2>
+        <a href="merch.html" class="view-all">View All</a>
+    </div>
+
+    <div class="merch-carousel-wrapper">
+
+        <div class="merch-carousel netflix-row" id="merchSlider">
+            <!-- Item 1 -->
+            <div class="merch-item">
+                <div class="merch-img-box"><img src="pics/album1.webp" alt="TEN Album"></div>
+                <h4>TEN: The Story Goes On</h4>
+                <p>₱1,623.42</p>
+            </div>
+            <!-- Item 2 -->
+            <div class="merch-item">
+                <div class="merch-img-box"><img src="pics/album2.webp" alt="abouTZU"></div>
+                <h4>abouTZU (Digipack ver.)</h4>
+                <p>₱985.42</p>
+            </div>
+            <!-- Item 3 -->
+            <div class="merch-item">
+                <div class="merch-img-box"><img src="pics/accessories3.png" alt="Pins"></div>
+                <h4>Wonder Girls Pins</h4>
+                <p><del>₱583.00</del> ₱500.00</p>
+            </div>
+            <!-- Item 4 -->
+            <div class="merch-item">
+                <div class="merch-img-box"><img src="pics/accessories4.webp" alt="Sticker Pack"></div>
+                <h4>JAY B Sticker Pack</h4>
+                <p>₱695.42</p>
+            </div>
+            <!-- Item 5 -->
+            <div class="merch-item">
+                <div class="merch-img-box"><img src="pics/clothing5.jpg" alt="Pull Twice Love"></div>
+                <h4>Pull Twice Love</h4>
+                <p><del>₱3,591.74</del> ₱2,514.01</p>
+            </div>
+            <!-- Item 6 -->
+            <div class="merch-item">
+                <div class="merch-img-box"><img src="pics/clothing6.jpg" alt="SKZ Shirt"></div>
+                <h4>Stray Kids Chaos T-shirt</h4>
+                <p><del>₱1,921.54</del> ₱1,537.00</p>
+            </div>
+            <!-- Item 7 -->
+            <div class="merch-item">
+                <div class="merch-img-box"><img src="pics/accessories7.jpg" alt="SKZOO Case"></div>
+                <h4>SKZOO iPhone Case</h4>
+                <p><del>₱1,268.00</del> ₱1,015.00</p>
+            </div>
+            <!-- Item 8 -->
+            <div class="merch-item">
+                <div class="merch-img-box"><img src="pics/album8.webp" alt="GOT7 Album"></div>
+                <h4>GOT7 JUST RIGHT Album</h4>
+                <p>₱1,626.06</p>
+            </div>
+        </div>
+
+        <div class="merch-dots" id="dotContainer"></div>
+           
+    </div>
+</div>
+
+<footer id="about">
+<div class="members-section">
+    <div class="container" style="padding:0;">
+        <h2>K-POP GROUP (JYP Entertainment)</h2>
+
+<div class="members-track-container">
+    <div class="members-track">
+
+        <!-- ================= ITZY ================= -->
+        <div class="member">
+            <div class="member-img-wrap" onclick="selectGroup(this, 'ITZY')">
+                <img src="pics/I.jfif" alt="ITZY">
+            </div>
+            <h4>ITZY</h4>
+            <p>Girl Group</p>
+
+            <div class="member-actions">
+                <button onclick="openYT(event, 'https://www.youtube.com/@ITZY')">
+                    🎥 YouTube
+                </button>
+
+                <button onclick="openInfo(event, 'https://kprofiles.com/itzy-members-profile/')">
+                    👤 Info
+                </button>
+            </div>
+        </div>
+
+        <!-- ================= GOT7 ================= -->
+        <div class="member">
+            <div class="member-img-wrap" onclick="selectGroup(this, 'GOT7')">
+                <img src="pics/G7.jfif" alt="GOT7">
+            </div>
+            <h4>GOT7</h4>
+            <p>Boy Group</p>
+
+            <div class="member-actions">
+                <button onclick="openYT(event, 'https://www.youtube.com/channel/UC8HEl74jL3bLLwfDP1OALxw')">
+                    🎥 YouTube
+                </button>
+
+                <button onclick="openInfo(event, 'https://kprofiles.com/got7-members-profile/')">
+                    👤 Info
+                </button>
+            </div>
+        </div>
+
+        <!-- ================= STRAY KIDS ================= -->
+        <div class="member">
+            <div class="member-img-wrap" onclick="selectGroup(this, 'STRAY_KIDS')">
+                <img src="pics/SK.jfif" alt="Stray Kids">
+            </div>
+            <h4>STRAY KIDS</h4>
+            <p>Boy Group</p>
+
+            <div class="member-actions">
+                <button onclick="openYT(event, 'https://www.youtube.com/channel/UC9rMiEjNaCSsebs31MRDCRA')">
+                    🎥 YouTube
+                </button>
+
+                <button onclick="openInfo(event, 'https://kprofiles.com/stray-kids-members-profile/')">
+                    👤 Info
+                </button>
+            </div>
+        </div>
+
+        <!-- ================= WONDER GIRLS ================= -->
+        <div class="member">
+            <div class="member-img-wrap" onclick="selectGroup(this, 'WONDER_GIRLS')">
+                <img src="pics/WG.jfif" alt="Wonder Girls">
+            </div>
+            <h4>WONDER GIRLS</h4>
+            <p>Girl Group</p>
+
+            <div class="member-actions">
+                <button onclick="openYT(event, 'https://www.youtube.com/channel/UCTE8ueKNA54RcO6MgXif2Tg')">
+                    🎥 YouTube
+                </button>
+
+                <button onclick="openInfo(event, 'https://kprofiles.com/wonder-girls-members-profile/')">
+                    👤 Info
+                </button>
+            </div>
+        </div>
+
+        <!-- ================= TWICE ================= -->
+        <div class="member">
+            <div class="member-img-wrap" onclick="selectGroup(this, 'TWICE')">
+                <img src="pics/T.jfif" alt="TWICE">
+            </div>
+            <h4>TWICE</h4>
+            <p>Girl Group</p>
+
+            <div class="member-actions">
+                <button onclick="openYT(event, 'https://www.youtube.com/channel/UCzgxx_DM2Dcb9Y1spb9mUJA')">
+                    🎥 YouTube
+                </button>
+
+                <button onclick="openInfo(event, 'https://kprofiles.com/twice-members-profile/')">
+                    👤 Info
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- AUDIO PLAYER (hidden) -->
+<audio id="bgMusic" loop></audio>
+
+    <div class="container footer-grid">
+       
+<div class="footer-col footer-about">
+    <div class="logo">
+        <img src="pics/logo.jfif" alt="Logo">
+        <span>KFANVERSE</span>
+    </div>
+
+    <p class="about-text">
+        A digital space built for K-POP fans to explore, connect, and enjoy everything in one place — from group updates and quizzes to discussions and curated merch culture.  
+        KFANVERSE exists to bring fandom energy together in a simple, interactive, and fun experience.
+    </p>
+</div>
+        <div class="footer-col quick-links">
+    <h3>QUICK LINKS</h3>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="updates.html">Updates</a></li>
+        <li><a href="quiz.html">Quizzes</a></li>
+        <li><a href="discussions.html">Discussions</a></li>
+        <li><a href="merch.html">Merchandise</a></li>
+        <li><a href="index.html#about">About Us</a></li>
+    </ul>
+</div>
+       <div class="footer-col support">
+    <h3>SUPPORT</h3>
+    <ul>
+        <li>Contact Us</li>
+        <li>FAQ</li>
+        <li>Guidelines</li>
+        <li>Privacy Policy</li>
+        <li>Terms of Service</li>
+    </ul>
+</div>
+        <div class="footer-col">
+            <h3>FOLLOW US</h3>
+            <div class="social-icons">
+                <img src="pics/fb.jfif" alt="FB">
+                <img src="pics/ig.jfif" alt="IG">
+                <img src="pics/yt.jfif" alt="YT">
+                <img src="pics/x.jfif" alt="X">
+            </div>
+        </div>
+    </div>
+</footer>
+
+<div id="loginOverlay" class="overlay">
+
+    <div class="auth-card">
+
+        <!-- CLOSE BUTTON -->
+        <button class="close-modal" onclick="closeLogin()">×</button>
+
+        <!-- TABS -->
+        <div class="auth-tabs">
+            <div class="auth-tab active" onclick="showLogin()">LOGIN</div>
+            <div class="auth-tab" onclick="showSignup()">SIGN UP</div>
+        </div>
+
+        <div class="auth-body">
+
+            <!-- LOGIN FORM -->
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Email or Username</label>
+                    <input type="text" placeholder="Enter your email or username" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="Enter your password" required>
+                </div>
+
+                <div class="form-helpers">
+                    <label class="remember-me">
+                        <input type="checkbox"> Remember me
+                    </label>
+                    <a href="#" class="forgot-pass">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="btn-auth-submit">LOGIN</button>
+
+                <div class="auth-footer">
+                    Don't have an account?
+                    <span onclick="showSignup()" style="cursor:pointer; text-decoration: underline;">
+                        Sign up
+                    </span>
+                </div>
+            </form>
+
+           <form id="signupForm" style="display:none;">
+
+    <div class="form-group">
+        <label>Username</label>
+        <input type="text" placeholder="Enter username" required>
+    </div>
+
+    <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="Enter email" required>
+    </div>
+
+    <div class="form-group">
+        <label>Password</label>
+        <input type="password" placeholder="Create password" required>
+    </div>
+
+    <div class="form-group">
+        <label>Confirm Password</label>
+        <input type="password" placeholder="Confirm password" required>
+    </div>
+
+    <!-- TERMS -->
+    <div class="terms-box">
+        <div class="terms-title">Terms of Agreement</div>
+
+        <p class="terms-text">
+            By creating an account, you agree to follow the community rules:
+        </p>
+
+        <ul class="terms-list">
+            <li>Respect all users and content</li>
+            <li>No spam or harmful behavior</li>
+            <li>Your data is used for account purposes only</li>
+        </ul>
+
+        <label class="terms-check">
+            <input type="checkbox" required>
+            I agree to the Terms & Privacy Policy
+        </label>
+    </div>
+
+    <!-- SPACED BUTTON AREA -->
+    <div style="margin-top: 18px;">
+        <button type="submit" class="btn-auth-submit">SIGN UP</button>
+    </div>
+
+    <div class="auth-footer" style="margin-top: 12px;">
+        Already have an account?
+        <span onclick="showLogin()" style="cursor:pointer; text-decoration: underline;">
+            Login
+        </span>
+    </div>
+
+</form>
+
+        </div>
+    </div>
+</div>
+
+  <script src="auth.js"></script>
+</body>
+</html>

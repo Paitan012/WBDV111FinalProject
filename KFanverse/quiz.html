@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KFANVERSE | Quizzes</title>
+<link rel="icon" type="image/jfif" href="pics/logo.jfif">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap');
+
+:root {
+    --pink: #ff4f93;
+    --mint: #19c7a6;
+    --lav: #8a6cff;
+    --text: #2b2230;
+    --muted: #6b5a70;
+}
+
+/* ================= RESET ================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Nunito', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg,
+        #ffd6e0,  /* soft pink */
+        #ffe8c7,  /* soft peach */
+        #fff0f5,  /* very soft rose white (not grey) */
+        #e7d3ff,  /* soft lavender */
+        #ffe3ec   /* blush pink */
+    );
+    background-size: 350% 350%;
+    animation: skyShift 22s ease infinite;
+    color: var(--dark);
+}
+
+@keyframes skyShift {
+    0% { background-position: 0% 50%; }
+    25% { background-position: 70% 30%; }
+    50% { background-position: 100% 70%; }
+    75% { background-position: 30% 100%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ================= PAGE ================= */
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 40px 20px;
+}
+
+.page-title {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 900;
+    margin-bottom: 35px;
+    color: var(--pink);
+}
+
+/* ================= GRID ================= */
+.quiz-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 22px;
+}
+
+/* ================= CARD ================= */
+.quiz-card {
+    border-radius: 22px;
+    overflow: hidden;
+    background: white;
+    border: 2px solid rgba(255, 79, 147, 0.15);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    transition: 0.25s ease;
+    position: relative;
+}
+
+.quiz-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(255, 79, 147, 0.25);
+    border-color: var(--pink);
+}
+
+/* IMAGE */
+.quiz-img {
+    width: 100%;
+    height: 190px;
+    overflow: hidden;
+    position: relative;
+}
+
+.quiz-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+/* LOCK OVERLAY */
+.quiz-card.locked .quiz-img::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+}
+
+/* INFO */
+.quiz-info {
+    padding: 16px;
+    text-align: center;
+    background: linear-gradient(to top, #ffffff, #fff7fb);
+}
+
+.quiz-info h3 {
+    font-weight: 900;
+    font-size: 15px;
+    margin-bottom: 6px;
+}
+
+.quiz-info p {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 12px;
+}
+
+/* BUTTON */
+.btn-take-quiz {
+    display: block;
+    padding: 12px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--mint), var(--pink));
+    color: white;
+    font-weight: 900;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.btn-take-quiz:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+/* DISABLED */
+.disabled {
+    background: #ddd !important;
+    color: #777 !important;
+    cursor: not-allowed;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    background: linear-gradient(to right, #fdf1f5, #e0f2f1, #fffbef);
+    border-bottom: 2px solid #e0f2f1;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* LOGO */
+.logo {
+    font-size: 24px;
+    font-weight: 900;
+    color: #795548;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    letter-spacing: 1px;
+}
+
+.logo img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+
+/* NAV CENTER */
+nav ul {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+    align-items: center;
+}
+
+nav ul li a {
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 14px;
+    color: #777;
+    position: relative;
+    transition: 0.2s;
+}
+
+/* HOVER */
+nav ul li a:hover {
+    color: #ff4f93;
+}
+
+/* ACTIVE (PINK UNDERLINE LIKE IMAGE) */
+nav ul li a.active {
+    color: #ff4f93;
+}
+
+nav ul li a.active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 2px;
+    background: #ff4f93;
+    border-radius: 5px;
+}
+
+/* RIGHT SIDE */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* SEARCH */
+.search-btn {
+    border: none;
+    background: transparent;
+    font-size: 20px;
+    cursor: pointer;
+    color: #4db6ac;
+    transition: 0.2s;
+}
+
+.search-btn:hover {
+    transform: scale(1.1);
+}
+
+/* USER ICON */
+#userIcon {
+    display: none;
+}
+
+#userIcon img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+/* --- OVERLAY --- */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(252, 228, 236, 0.7); /* soft pink fade */
+    backdrop-filter: blur(4px); /* subtle blur for modern feel */
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+}
+
+/* --- MODAL CARD --- */
+.auth-card {
+    background: linear-gradient(135deg, #ffffff, #fff8f9);
+    width: 100%;
+    max-width: 380px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+/* --- TABS --- */
+.auth-tabs {
+    display: flex;
+    background: #fce4ec;
+}
+
+.auth-tab {
+    flex: 1;
+    padding: 15px;
+    text-align: center;
+    font-weight: 800;
+    font-size: 14px;
+    cursor: pointer;
+    color: #8c7b75;
+    transition: 0.2s;
+}
+
+.auth-tab.active {
+    background: white;
+    color: #d81b60;
+    border-bottom: 3px solid #ff80ab;
+}
+
+/* --- FORM BODY --- */
+.auth-body {
+    padding: 25px;
+}
+
+/* --- INPUTS --- */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 800;
+    margin-bottom: 5px;
+    font-size: 13px;
+    color: #4a3b52;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1.5px solid #e0f2f1;
+    border-radius: 10px;
+    background: #fff;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #4db6ac;
+    box-shadow: 0 0 0 2px rgba(77,182,172,0.2);
+}
+
+/* --- HELPERS --- */
+.form-helpers {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.remember-me {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.forgot-pass {
+    color: #d81b60;
+    font-weight: 700;
+}
+
+/* --- BUTTON --- */
+.btn-auth-submit {
+    width: 100%;
+    padding: 12px;
+    background: #4db6ac;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-weight: 900;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(77,182,172,0.3);
+    transition: 0.2s;
+}
+
+.btn-auth-submit:hover {
+    background: #00897b;
+}
+
+/* --- FOOTER TEXT --- */
+.auth-footer {
+    margin-top: 12px;
+    font-size: 12px;
+    text-align: center;
+    color: #6a5a73;
+}
+
+/* --- CLOSE BUTTON --- */
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #ff80ab;
+    border: none;
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    font-weight: 900;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-modal:hover {
+    background: #d81b60;
+}
+
+.auth-area {
+    display: flex;
+    align-items: center;
+}
+
+/* FIX MODAL SIZE + SCROLL */
+.auth-card {
+    width: 100%;
+    max-width: 420px;
+    max-height: 90vh;          /* prevents overflow */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* BODY SCROLL AREA */
+.auth-body {
+    padding: 25px;
+    overflow-y: auto;          /* IMPORTANT */
+    max-height: 70vh;          /* keeps content inside */
+}
+
+/* MORE SPACE BETWEEN INPUTS */
+.form-group {
+    margin-bottom: 14px;
+}
+
+/* BUTTON FIX (no squish effect) */
+.btn-auth-submit {
+    margin-top: 10px;
+}
+
+/* MOBILE FIX */
+@media (max-height: 700px) {
+    .auth-body {
+        max-height: 60vh;
+    }
+}
+
+/* TERMS BOX FIX */
+.terms-box {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    padding: 14px;
+    border-radius: 14px;
+    background: #ffeaf1;
+    border: 2px solid #ff80ab;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+/* TERMS TITLE */
+.terms-title {
+    font-weight: 900;
+    color: #d81b60;
+    margin-bottom: 6px;
+}
+
+/* TERMS LIST */
+.terms-list {
+    margin: 8px 0;
+    padding-left: 18px;
+}
+
+/* CHECKBOX SPACE */
+.terms-check {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-top: 10px;
+    font-weight: 700;
+}
+
+/* AUTH BUTTONS */
+.auth-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.auth-buttons button {
+    padding: 8px 22px;
+    border-radius: 25px;
+    border: none;
+    font-weight: 800;
+    font-size: 13px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
+}
+
+/* LOGIN */
+.btn-login {
+    background-color: #80cbc4;
+    color: white;
+}
+
+.btn-login:hover {
+    background-color: #4db6ac;
+}
+
+/* SIGNUP */
+.btn-signup {
+    background-color: #ff80ab;
+    color: white;
+}
+
+.btn-signup:hover {
+    background-color: #d81b60;
+}
+
+.auth-info-text {
+    position: absolute;
+    top: 18px;
+    left: 20px;
+
+    font-size: 12px;
+    color: #444;
+    opacity: 0.85;
+
+    user-select: none;
+    letter-spacing: 1px;
+
+    padding: 6px 10px;
+    border-radius: 8px;
+
+    background: rgba(165, 235, 245, 0.6);
+    backdrop-filter: blur(6px);
+
+    border: 1px solid rgba(0, 0, 0, 0.08);
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.auth-info-col {
+    flex: 1;
+}
+
+.auth-info-text p {
+    margin: 2px 0;
+}
+
+.auth-info-text strong {
+    display: block;
+    margin-bottom: 6px;
+    color: #000;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="header-content">
+        
+        <!-- LOGO -->
+        <div class="logo">
+            <img src="pics/logo.jfif" alt="Logo">
+            KFANVERSE
+        </div>
+
+       <nav>
+    <ul>
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="updates.html">UPDATES</a></li>
+        <li><a href="quiz.html" class="active">QUIZZES</a></li>
+        <li><a href="discussions.html">DISCUSSIONS</a></li>
+        <li><a href="merch.html">MERCHANDISE</a></li>
+        <li><a href="index.html#about">ABOUT US</a></li>
+    </ul>
+</nav>
+
+        <!-- RIGHT SIDE -->
+        <div class="header-right">
+
+            <!-- SEARCH -->
+            <button class="search-btn" onclick="handleSearch()">🔍</button>
+
+           <!-- LOGIN / SIGNUP -->
+            <div class="auth-buttons">
+                <button class="btn-login" onclick="openLogin(); showLogin()">LOGIN</button>
+                <button class="btn-signup" onclick="openLogin(); showSignup()">SIGN UP</button>
+            </div>
+
+            <!-- USER ICON (hidden until login) -->
+            <div id="userIcon">
+                <a href="profile.html">
+                    <img src="pics/Momo User.jfif" class="user-icon">
+                </a>
+            </div>
+
+        </div>
+    </div>
+</header>
+
+<div class="container">
+
+<div class="page-title">QUIZZES</div>
+
+<div class="quiz-grid">
+
+    <!-- 1 -->
+<div class="quiz-card">
+    <div class="quiz-img">
+        <img src="pics/q1.jfif">
+    </div>
+
+    <div class="quiz-info">
+        <h3>WHICH TWICE MEMBER ARE YOU?</h3>
+        <p>Personality Quiz • 20 Questions</p>
+
+        <a href="https://www.quizexpo.com/which-twice-member-are-you-quiz/"
+           target="_blank"
+           class="btn-take-quiz">
+            TAKE QUIZ
+        </a>
+    </div>
+</div>
+
+<!-- 2 -->
+<div class="quiz-card">
+    <div class="quiz-img">
+        <img src="pics/q2.jfif">
+    </div>
+
+    <div class="quiz-info">
+        <h3>GUESS THE LIGHTSTICK</h3>
+        <p>K-pop Knowledge Quiz • 22 Questions</p>
+
+        <a href="https://www.quotev.com/quiz/12318075/Guess-the-K-pop-group-by-the-lightstick-UPDATED"
+           target="_blank"
+           class="btn-take-quiz">
+            TAKE QUIZ
+        </a>
+    </div>
+</div>
+
+    <!-- 3 (LOCKED) -->
+    <div class="quiz-card locked">
+        <div class="quiz-img">
+            <img src="pics/q3.jfif">
+        </div>
+        <div class="quiz-info">
+            <h3>MV SCENE CHALLENGE</h3>
+            <p>COMING SOON</p>
+            <button class="btn-take-quiz disabled" disabled>LOCKED</button>
+        </div>
+    </div>
+
+    <!-- 4 (LOCKED) -->
+    <div class="quiz-card locked">
+        <div class="quiz-img">
+            <img src="pics/q4.jpg">
+        </div>
+        <div class="quiz-info">
+            <h3>GUESS THE MEMBER</h3>
+            <p>COMING SOON</p>
+            <button class="btn-take-quiz disabled" disabled>LOCKED</button>
+        </div>
+    </div>
+
+    <!-- 5 (LOCKED) -->
+    <div class="quiz-card locked">
+        <div class="quiz-img">
+            <img src="pics/q5.jpg">
+        </div>
+        <div class="quiz-info">
+            <h3>K-POP LYRICS QUIZ</h3>
+            <p>COMING SOON</p>
+            <button class="btn-take-quiz disabled" disabled>LOCKED</button>
+        </div>
+    </div>
+
+    <!-- 6 (LOCKED) -->
+    <div class="quiz-card locked">
+        <div class="quiz-img">
+            <img src="pics/q6.jpg">
+        </div>
+        <div class="quiz-info">
+            <h3>IDOL EMOJI GAME</h3>
+            <p>COMING SOON</p>
+            <button class="btn-take-quiz disabled" disabled>LOCKED</button>
+        </div>
+    </div>
+
+</div>
+
+</div>
+
+<div id="loginOverlay" class="overlay">
+<div class="auth-info-text">
+
+    <div class="auth-info-col">
+        <p><strong>Admin Access</strong></p>
+        <p>Email: admin123@gmail.com</p>
+        <p>Password: admin123</p>
+    </div>
+
+    <div class="auth-info-col">
+        <p><strong>Super Admin Access</strong></p>
+        <p>Email: sadmin123@gmail.com</p>
+        <p>Password: sadmin123</p>
+    </div>
+
+</div>
+    <div class="auth-card">
+
+        <!-- CLOSE BUTTON -->
+        <button class="close-modal" onclick="closeLogin()">×</button>
+
+        <!-- TABS -->
+        <div class="auth-tabs">
+    <div class="auth-tab active" onclick="showLogin(this)">LOGIN</div>
+    <div class="auth-tab" onclick="showSignup(this)">SIGN UP</div>
+        </div>
+
+        <div class="auth-body">
+
+            <!-- LOGIN FORM -->
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Email or Username</label>
+                    <input type="text" placeholder="Enter your email or username" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="Enter your password" required>
+                </div>
+
+                <div class="form-helpers">
+                    <label class="remember-me">
+                        <input type="checkbox"> Remember me
+                    </label>
+                    <a href="#" class="forgot-pass">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="btn-auth-submit">LOGIN</button>
+
+                <div class="auth-footer">
+                    Don't have an account?
+                    <span onclick="showSignup()" style="cursor:pointer; text-decoration: underline;">
+                        Sign up
+                    </span>
+                </div>
+            </form>
+
+           <form id="signupForm" style="display:none;">
+
+    <div class="form-group">
+        <label>Username</label>
+        <input type="text" placeholder="Enter username" required>
+    </div>
+
+    <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="Enter email" required>
+    </div>
+
+    <div class="form-group">
+        <label>Password</label>
+        <input type="password" placeholder="Create password" required>
+    </div>
+
+    <div class="form-group">
+        <label>Confirm Password</label>
+        <input type="password" placeholder="Confirm password" required>
+    </div>
+
+    <!-- TERMS -->
+    <div class="terms-box">
+        <div class="terms-title">Terms of Agreement</div>
+
+        <p class="terms-text">
+            By creating an account, you agree to follow the community rules:
+        </p>
+
+        <ul class="terms-list">
+            <li>Respect all users and content</li>
+            <li>No spam or harmful behavior</li>
+            <li>Your data is used for account purposes only</li>
+        </ul>
+
+        <label class="terms-check">
+            <input type="checkbox" required>
+            I agree to the Terms & Privacy Policy
+        </label>
+    </div>
+
+    <!-- SPACED BUTTON AREA -->
+    <div style="margin-top: 18px;">
+        <button type="submit" class="btn-auth-submit">SIGN UP</button>
+    </div>
+
+    <div class="auth-footer" style="margin-top: 12px;">
+        Already have an account?
+        <span onclick="showLogin()" style="cursor:pointer; text-decoration: underline;">
+            Login
+        </span>
+    </div>
+
+</form>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+    /* =============================
+    LOGIN / SIGNUP ACTION 
+    (Keep this version, it has the username logic!)
+============================= */
+
+function login() {
+    // 1. Get the username from the login input
+    const usernameInput = document.querySelector("#loginForm input[type='text']");
+    const username = usernameInput ? usernameInput.value : "ONCE_USER";
+
+    // 2. Save data to localStorage
+    localStorage.setItem("isLoggedIn", "true");
+    localStorage.setItem("userName", username);
+    
+    // Set a default profile pic if none exists
+    if (!localStorage.getItem("userAvatar")) {
+        localStorage.setItem("userAvatar", "pics/MomoUser.jfif");
+    }
+
+    updateAuthState();
+    closeLogin();
+}
+
+function signup() {
+    // 1. Get the username from the signup input
+    const usernameInput = document.querySelector("#signupForm input[type='text']");
+    const username = usernameInput ? usernameInput.value : "ONCE_USER";
+
+    // 2. Save data to localStorage
+    localStorage.setItem("isLoggedIn", "true");
+    localStorage.setItem("userName", username);
+    
+    // Set a default profile pic for new signups
+    localStorage.setItem("userAvatar", "pics/MomoUser.jfif");
+
+    updateAuthState();
+    closeLogin();
+}
+
+/* =============================
+    AUTH STATE (SYMBOLS & PICS)
+============================= */
+
+function updateAuthState() {
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    const authButtons = document.querySelector(".auth-buttons");
+    const userIconWrapper = document.getElementById("userIcon");
+    const userIconImg = document.querySelector("#userIcon img");
+
+    if (isLoggedIn === "true") {
+        if (authButtons) authButtons.style.display = "none";
+        if (userIconWrapper) userIconWrapper.style.display = "block";
+        
+        // Sync the mini icon with the saved profile picture
+        const savedPic = localStorage.getItem("userAvatar");
+        if (userIconImg && savedPic) {
+            userIconImg.src = savedPic;
+        }
+    } else {
+        if (authButtons) authButtons.style.display = "flex";
+        if (userIconWrapper) userIconWrapper.style.display = "none";
+    }
+}
+
+/* =============================
+    OPEN / CLOSE MODAL
+============================= */
+
+function openLogin() {
+    document.getElementById("loginOverlay").style.display = "flex";
+    showLogin();
+}
+
+function openSignup() {
+    document.getElementById("loginOverlay").style.display = "flex";
+    showSignup();
+}
+
+function closeLogin() {
+    document.getElementById("loginOverlay").style.display = "none";
+}
+
+/* =============================
+    SWITCH FORMS
+============================= */
+
+function showLogin() {
+    document.getElementById("loginForm").style.display = "block";
+    document.getElementById("signupForm").style.display = "none";
+}
+
+function showSignup() {
+    document.getElementById("loginForm").style.display = "none";
+    document.getElementById("signupForm").style.display = "block";
+}
+
+/* =============================
+    FORM EVENTS
+============================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+    updateAuthState();
+
+    const lForm = document.getElementById("loginForm");
+    const sForm = document.getElementById("signupForm");
+
+    if(lForm) {
+        lForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            login();
+        });
+    }
+
+    if(sForm) {
+        sForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            signup();
+        });
+    }
+});
+
+/* =============================
+    SEARCH
+============================= */
+
+function handleSearch() {
+    let query = prompt("Search KFanverse navigation:");
+    if (!query) return;
+    query = query.toLowerCase();
+
+    const routes = {
+        "home": "index.html",
+        "update": "updates.html",
+        "quiz": "quiz.html",
+        "discussion": "discussions.html",
+        "merch": "merch.html"
+    };
+
+    for (let key in routes) {
+        if (query.includes(key)) {
+            window.location.href = routes[key];
+            return;
+        }
+    }
+    alert("No results found 😢");
+}
+
+/* =============================
+    STORAGE SYNC & ANCHORS
+============================= */
+
+window.addEventListener("storage", updateAuthState);
+
+window.addEventListener("load", () => {
+    if (window.location.hash) {
+        const target = document.querySelector(window.location.hash);
+        if (target) {
+            target.scrollIntoView({ behavior: "smooth" });
+        }
+    }
+});
+
+function showLogin(el = document.querySelector(".auth-tab")) {
+    // switch tab highlight
+    document.querySelectorAll(".auth-tab").forEach(t => t.classList.remove("active"));
+    el.classList.add("active");
+
+    // show login / hide signup
+    document.getElementById("loginForm").style.display = "block";
+    document.getElementById("signupForm").style.display = "none";
+}
+
+function showSignup(el = document.querySelectorAll(".auth-tab")[1]) {
+    // switch tab highlight
+    document.querySelectorAll(".auth-tab").forEach(t => t.classList.remove("active"));
+    el.classList.add("active");
+
+    // show signup / hide login
+    document.getElementById("loginForm").style.display = "none";
+    document.getElementById("signupForm").style.display = "block";
+}
+
+document.getElementById("loginForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const email = document.querySelector("#loginForm input[type='text']").value.trim();
+    const password = document.querySelector("#loginForm input[type='password']").value.trim();
+
+    // ADMIN
+    if (email === "admin123@gmail.com" && password === "admin123") {
+        localStorage.setItem("role", "admin");
+        window.location.href = "admin.html";
+        return;
+    }
+
+    // SUPER ADMIN
+    if (email === "sadmin123@gmail.com" && password === "sadmin123") {
+        localStorage.setItem("role", "superadmin");
+        window.location.href = "sadmin.html";
+        return;
+    }
+
+    // NORMAL USER
+    localStorage.setItem("isLoggedIn", "true");
+    localStorage.setItem("userName", email);
+
+    updateAuthState();
+    closeLogin();
+});
+</script>
+</body>
+</html>
