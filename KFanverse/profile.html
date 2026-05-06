@@ -220,13 +220,89 @@
         }
 
         .hidden { display: none; }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            /* Update to a color from character (e.g., eye color or deep pink) */
+            color: #795548; 
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: 1px;
+        }
+
+        .logo img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+
+/* SEARCH */
+.search-btn {
+    border: none;
+    background: transparent;
+    font-size: 20px;
+    cursor: pointer;
+    color: #4db6ac;
+    transition: 0.2s;
+}
+
+.search-btn:hover {
+    transform: scale(1.1);
+}
+
+/* RIGHT SIDE */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* NAV CENTER */
+nav ul {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+    align-items: center;
+}
+
+nav ul li a {
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 14px;
+    color: #777;
+    position: relative;
+    transition: 0.2s;
+}
+
+/* HOVER */
+nav ul li a:hover {
+    color: #ff4f93;
+}
+
+/* ACTIVE (PINK UNDERLINE LIKE IMAGE) */
+nav ul li a.active {
+    color: #ff4f93;
+}
+
+nav ul li a.active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 2px;
+    background: #ff4f93;
+    border-radius: 5px;
+}
     </style>
 </head>
 <body>
 
 <header>
     <div class="header-content">
-        <a href="index.html" class="logo">KFANVERSE</a>
+        <a href="index.html" class="logo"><img src="pics/logo.jfif" alt="logo">KFANVERSE</a>
         <nav>
             <ul>
                 <li><a href="index.html">HOME</a></li>
@@ -234,9 +310,13 @@
                 <li><a href="quiz.html">QUIZZES</a></li>
                 <li><a href="discussions.html">DISCUSSIONS</a></li>
                 <li><a href="merch.html">MERCHANDISE</a></li>
+                <li><a href="index.html#about">ABOUT US</a></li>
             </ul>
         </nav>
+        <div class="header-right">
+        <button class="search-btn" onclick="handleSearch()">🔍</button>
         <div class="user-icon" id="header-icon"></div>
+        </div>
     </div>
 </header>
 
@@ -265,7 +345,7 @@
             </div>
             <div class="posts-container">
                 <h2>Recent Activity</h2>
-                <div class="post-row"><span>"Which TWICE member are you?" Result: Mina</span><span style="opacity: 0.5;">2hr ago</span></div>
+                <div class="post-row"><span>"Which TWICE member are you?" Result: Dahyun</span><span style="opacity: 0.5;">2hr ago</span></div>
                 <div class="post-row"><span>Commented on "Doughnut MV Analysis"</span><span style="opacity: 0.5;">5hr ago</span></div>
             </div>
         </section>
@@ -394,7 +474,28 @@
     ============================= */
     document.addEventListener("DOMContentLoaded", updateUI);
 
-    
+    function handleSearch() {
+    let query = prompt("Search KFanverse navigation:");
+    if (!query) return;
+    query = query.toLowerCase();
+
+    const routes = {
+        "home": "index.html",
+        "update": "updates.html",
+        "quiz": "quiz.html",
+        "discussion": "discussions.html",
+        "merch": "merch.html"
+    };
+
+    for (let key in routes) {
+        if (query.includes(key)) {
+            window.location.href = routes[key];
+            return;
+        }
+    }
+    alert("No results found 😢");
+}
+
 </script>
 </body>
 </html>

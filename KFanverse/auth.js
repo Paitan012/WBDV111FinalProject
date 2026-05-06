@@ -1,8 +1,6 @@
-
 /* =========================================================
    HERO CAROUSEL
 ========================================================= */
-
 const heroTrack = document.querySelector('.hero .image-track');
 const heroImages = heroTrack ? Array.from(heroTrack.children) : [];
 const heroNextBtn = document.querySelector('.hero-btn-next');
@@ -28,10 +26,7 @@ function moveHeroToSlide(index) {
 
 function startHeroAutoPlay() {
     if (!heroTrack || heroImages.length === 0) return;
-
-    heroInterval = setInterval(() => {
-        moveHeroToSlide(heroIndex + 1);
-    }, 4000);
+    heroInterval = setInterval(() => moveHeroToSlide(heroIndex + 1), 4000);
 }
 
 function resetHeroAutoPlay() {
@@ -58,50 +53,74 @@ heroDots.forEach((dot, index) => {
 
 startHeroAutoPlay();
 
-
 /* =========================================================
-   AUTH SYSTEM (CLEAN FIXED VERSION)
+   AUTH SYSTEM (CONSOLIDATED)
 ========================================================= */
-
 function updateAuthState() {
     const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-
     const authButtons = document.querySelector(".auth-buttons");
-    const userIcon = document.getElementById("userIcon");
+    const userIconWrapper = document.getElementById("userIcon");
+    const userIconImg = document.querySelector("#userIcon img");
 
-    if (!authButtons || !userIcon) return;
+    const savedPic = localStorage.getItem("userAvatar") || "pics/MomoUser.jfif";
 
-    authButtons.style.display = isLoggedIn ? "none" : "flex";
-    userIcon.style.display = isLoggedIn ? "block" : "none";
+    if (isLoggedIn) {
+        if (authButtons) authButtons.style.display = "none";
+        if (userIconWrapper) userIconWrapper.style.display = "block";
+        if (userIconImg) {
+            userIconImg.src = savedPic + "?v=" + Date.now();
+        }
+    } else {
+        if (authButtons) authButtons.style.display = "flex";
+        if (userIconWrapper) userIconWrapper.style.display = "none";
+    }
 }
 
 function login() {
-    const usernameInput = document.querySelector("#loginForm input[type='text']");
-    const username = usernameInput ? usernameInput.value : "ONCE_USER";
+    const emailInput = document.querySelector("#loginForm input[type='text']");
+    const passwordInput = document.querySelector("#loginForm input[type='password']");
+    const email = emailInput ? emailInput.value.trim() : "";
+    const password = passwordInput ? passwordInput.value.trim() : "";
+
+    // Admin login checks
+    if (email === "admin123@gmail.com" && password === "admin123") {
+        localStorage.setItem("role", "admin");
+        window.location.href = "admin.html";
+        return;
+    }
+    if (email === "sadmin123@gmail.com" && password === "sadmin123") {
+        localStorage.setItem("role", "superadmin");
+        window.location.href = "sadmin.html";
+        return;
+    }
 
     localStorage.setItem("isLoggedIn", "true");
-    localStorage.setItem("userName", username);
-
+    localStorage.setItem("userName", email || "ONCE_USER");
     updateAuthState();
     closeLogin();
 }
 
 function signup() {
     const usernameInput = document.querySelector("#signupForm input[type='text']");
-    const username = usernameInput ? usernameInput.value : "ONCE_USER";
+    const username = usernameInput ? usernameInput.value.trim() : "ONCE_USER";
 
     localStorage.setItem("isLoggedIn", "true");
     localStorage.setItem("userName", username);
-
     updateAuthState();
     closeLogin();
 }
 
+function logoutUser() {
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("userName");
+    localStorage.removeItem("userAvatar");
+    updateAuthState();
+    window.location.href = "index.html";
+}
 
 /* =========================================================
-   LOGIN MODAL
+   LOGIN MODAL (CONSOLIDATED)
 ========================================================= */
-
 function openLogin() {
     document.getElementById("loginOverlay").style.display = "flex";
     showLogin();
@@ -116,79 +135,78 @@ function closeLogin() {
     document.getElementById("loginOverlay").style.display = "none";
 }
 
-function showLogin() {
+function showLogin(el = document.querySelector(".auth-tab")) {
+    document.querySelectorAll(".auth-tab").forEach(t => t.classList.remove("active"));
+    el?.classList.add("active");
     document.getElementById("loginForm").style.display = "block";
     document.getElementById("signupForm").style.display = "none";
 }
 
-function showSignup() {
+function showSignup(el = document.querySelectorAll(".auth-tab")[1]) {
+    document.querySelectorAll(".auth-tab").forEach(t => t.classList.remove("active"));
+    el?.classList.add("active");
     document.getElementById("loginForm").style.display = "none";
     document.getElementById("signupForm").style.display = "block";
 }
 
-
 /* =========================================================
-   FORM EVENTS (IMPORTANT FIX)
+   MAIN INIT (CONSOLIDATED)
 ========================================================= */
-
 document.addEventListener("DOMContentLoaded", () => {
-
     updateAuthState();
 
-    const lForm = document.getElementById("loginForm");
-    const sForm = document.getElementById("signupForm");
+    // Form submissions
+    const loginForm = document.getElementById("loginForm");
+    const signupForm = document.getElementById("signupForm");
 
-    if (lForm) {
-        lForm.addEventListener("submit", (e) => {
+    if (loginForm) {
+        loginForm.addEventListener("submit", (e) => {
             e.preventDefault();
             login();
         });
     }
 
-    if (sForm) {
-        sForm.addEventListener("submit", (e) => {
+    if (signupForm) {
+        signupForm.addEventListener("submit", (e) => {
             e.preventDefault();
             signup();
         });
     }
+
+    // Home discussions
+    renderHomeDiscussions();
 });
-
-
-/* =========================================================
-   LOGOUT
-========================================================= */
-
-function logoutUser() {
-    localStorage.removeItem("isLoggedIn");
-    updateAuthState();
-    window.location.href = "index.html";
-}
-
 
 /* =========================================================
    SEARCH
 ========================================================= */
-
 function handleSearch() {
     let query = prompt("Search KFanverse navigation:");
     if (!query) return;
 
     query = query.toLowerCase();
 
-    if (query.includes("home")) window.location.href = "index.html";
-    else if (query.includes("update")) window.location.href = "updates.html";
-    else if (query.includes("quiz")) window.location.href = "quiz.html";
-    else if (query.includes("discussion")) window.location.href = "discussions.html";
-    else if (query.includes("merch")) window.location.href = "merch.html";
-    else if (query.includes("about")) window.location.href = "about us.html";
-    else alert("No results found 😢");
-}
+    const routes = {
+        "home": "index.html",
+        "update": "updates.html",
+        "quiz": "quiz.html",
+        "discussion": "discussions.html",
+        "merch": "merch.html",
+        "about": "about us.html"
+    };
 
+    for (const [key, url] of Object.entries(routes)) {
+        if (query.includes(key)) {
+            window.location.href = url;
+            return;
+        }
+    }
+    alert("No results found 😢");
+}
 
 /* =========================================================
    LOADER
 ========================================================= */
-
 const startBtn = document.getElementById("start-btn");
 const loader = document.getElementById("loader");
 const content = document.getElementById("main-content");
@@ -196,7 +214,6 @@ const audio = document.getElementById("opening-audio");
 
 window.addEventListener("load", () => {
     const hasEntered = sessionStorage.getItem("hasEntered");
-
     if (loader) loader.style.display = hasEntered === "true" ? "none" : "flex";
     if (content) content.style.display = hasEntered === "true" ? "block" : "none";
 });
@@ -204,7 +221,11 @@ window.addEventListener("load", () => {
 startBtn?.addEventListener("click", () => {
     sessionStorage.setItem("hasEntered", "true");
 
-    audio?.play().catch(() => {});
+    // ⭐ LOW VOLUME ADDED HERE
+    if (audio) {
+        audio.volume = 0.2; // 20% volume (adjust if you want softer)
+        audio.play().catch(() => {});
+    }
 
     startBtn.innerText = "Entering...";
     startBtn.disabled = true;
@@ -216,159 +237,113 @@ startBtn?.addEventListener("click", () => {
             if (loader) loader.style.display = "none";
             if (content) content.style.display = "block";
         }, 350);
-    }, 1500);
+
+    }, 3500);
 });
 
-
 /* =========================================================
-   DISCUSSIONS (SAFE VERSION)
+   MERCH SLIDER (CONSOLIDATED)
 ========================================================= */
-
-let discussions = JSON.parse(localStorage.getItem("discussions")) || [];
-
-function formatTime(timestamp) {
-    const diff = Date.now() - timestamp;
-
-    const minutes = Math.floor(diff / 60000);
-    const hours = Math.floor(diff / 3600000);
-    const days = Math.floor(diff / 86400000);
-
-    if (minutes < 1) return "just now";
-    if (minutes < 60) return `${minutes}m ago`;
-    if (hours < 24) return `${hours}h ago`;
-    return `${days}d ago`;
-}
-
-function renderHomeDiscussions() {
-    const container = document.getElementById("homeDiscussionList");
-    if (!container) return;
-
-    container.innerHTML = "";
-
-    const topPosts = discussions.slice(0, 3);
-    const fallback = "pics/DahyunUser.jfif";
-
-    topPosts.forEach(post => {
-        const div = document.createElement("div");
-        div.className = "discussion-item";
-
-        div.innerHTML = `
-            <div class="disc-icon">
-                <img src="${post.image || fallback}" onerror="this.src='${fallback}'">
-            </div>
-            <div class="disc-info">
-                <h4>${post.title}</h4>
-                <p>By ${post.author} • ${post.replies?.length || 0} replies • ${formatTime(post.time)}</p>
-            </div>
-        `;
-
-        div.onclick = () => {
-            localStorage.setItem("selectedPostId", post.id);
-            window.location.href = "discussions.html";
-        };
-
-        container.appendChild(div);
-    });
-}
-
-document.addEventListener("DOMContentLoaded", renderHomeDiscussions);
-
-
-/* =========================================================
-   MERCH AUTO SCROLL (SIMPLE FIXED)
-========================================================= */
-
 const merchSlider = document.getElementById("merchSlider");
+const dotContainer = document.getElementById("dotContainer");
 
-if (merchSlider) {
+if (merchSlider && dotContainer) {
     let paused = false;
+    const itemWidth = merchSlider.children[0]?.offsetWidth + 15 || 0;
+    const items = merchSlider.children.length;
 
+    // Create dots
+    dotContainer.innerHTML = "";
+    for (let i = 0; i < items; i++) {
+        const dot = document.createElement("div");
+        dot.classList.add("dot");
+        dot.addEventListener("click", () => {
+            merchSlider.scrollTo({ left: itemWidth * i, behavior: "smooth" });
+            setActiveDot(i);
+        });
+        dotContainer.appendChild(dot);
+    }
+
+    // Pause on hover
     merchSlider.addEventListener("mouseenter", () => paused = true);
     merchSlider.addEventListener("mouseleave", () => paused = false);
 
+    // Scroll events
+    merchSlider.addEventListener("scroll", () => {
+        const index = Math.round(merchSlider.scrollLeft / itemWidth);
+        setActiveDot(index);
+    });
+
+    // Auto scroll
     function autoScroll() {
         if (!paused) {
             merchSlider.scrollLeft += 1;
-
             if (merchSlider.scrollLeft >= merchSlider.scrollWidth - merchSlider.clientWidth) {
                 merchSlider.scrollTo({ left: 0, behavior: "auto" });
             }
         }
         requestAnimationFrame(autoScroll);
     }
-
     autoScroll();
 }
 
+function setActiveDot(index) {
+    const dots = document.querySelectorAll("#dotContainer .dot");
+    dots.forEach(d => d.classList.remove("active"));
+    if (dots[index]) dots[index].classList.add("active");
+}
 
-function updateAuthState() {
-    const isLoggedIn = localStorage.getItem("isLoggedIn");
-    const authButtons = document.querySelector(".auth-buttons");
-    const userIconWrapper = document.getElementById("userIcon");
-    const userIconImg = document.querySelector("#userIcon img");
+/* =========================================================
+   MEMBER SELECTION
+========================================================= */
+function selectGroup(el, groupName) {
+    const member = el.closest('.member');
+    document.querySelectorAll('.member').forEach(m => m.classList.remove('selected'));
+    member?.classList.add('selected');
+}
 
-    const savedPic = localStorage.getItem("userAvatar") || "pics/MomoUser.jfif";
+function selectGroup(el, groupName) {
+    const member = el.closest('.member');
 
-    if (isLoggedIn === "true") {
-        if (authButtons) authButtons.style.display = "none";
-        if (userIconWrapper) userIconWrapper.style.display = "block";
+    // remove old selection
+    document.querySelectorAll('.member').forEach(m => {
+        m.classList.remove('selected');
+    });
 
-        // 🔥 FORCE IMAGE ALWAYS (fix refresh bug)
-        if (userIconImg) {
-            userIconImg.src = savedPic + "?v=" + Date.now(); 
-            // cache-buster so browser doesn't reuse old broken image
+    // add selection
+    member?.classList.add('selected');
+
+    console.log("Selected group:", groupName);
+}
+
+function openYT(event, url) {
+    event.stopPropagation(); // prevents triggering selectGroup
+    window.open(url, "_blank");
+}
+
+function openInfo(event, url) {
+    event.stopPropagation(); // prevents triggering selectGroup
+    window.open(url, "_blank");
+}
+
+function fadeOutMusic() {
+    if (!audio) return;
+
+    let vol = audio.volume;
+
+    clearInterval(fadeInterval);
+
+    fadeInterval = setInterval(() => {
+        if (vol > 0.02) {
+            vol -= 0.02;
+            audio.volume = vol;
+        } else {
+            audio.pause();
+            audio.volume = 0.2; // reset for next visit
+            clearInterval(fadeInterval);
         }
-
-    } else {
-        if (authButtons) authButtons.style.display = "flex";
-        if (userIconWrapper) userIconWrapper.style.display = "none";
-    }
+    }, 50);
 }
 
-function showLogin(el = document.querySelector(".auth-tab")) {
-    // switch tab highlight
-    document.querySelectorAll(".auth-tab").forEach(t => t.classList.remove("active"));
-    el.classList.add("active");
-
-    // show login / hide signup
-    document.getElementById("loginForm").style.display = "block";
-    document.getElementById("signupForm").style.display = "none";
-}
-
-function showSignup(el = document.querySelectorAll(".auth-tab")[1]) {
-    // switch tab highlight
-    document.querySelectorAll(".auth-tab").forEach(t => t.classList.remove("active"));
-    el.classList.add("active");
-
-    // show signup / hide login
-    document.getElementById("loginForm").style.display = "none";
-    document.getElementById("signupForm").style.display = "block";
-}
-
-document.getElementById("loginForm").addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    const email = document.querySelector("#loginForm input[type='text']").value.trim();
-    const password = document.querySelector("#loginForm input[type='password']").value.trim();
-
-    // ADMIN
-    if (email === "admin123@gmail.com" && password === "admin123") {
-        localStorage.setItem("role", "admin");
-        window.location.href = "admin.html";
-        return;
-    }
-
-    // SUPER ADMIN
-    if (email === "sadmin123@gmail.com" && password === "sadmin123") {
-        localStorage.setItem("role", "superadmin");
-        window.location.href = "sadmin.html";
-        return;
-    }
-
-    // NORMAL USER
-    localStorage.setItem("isLoggedIn", "true");
-    localStorage.setItem("userName", email);
-
-    updateAuthState();
-    closeLogin();
-});
+// when user leaves page
+window.addEventListener("beforeunload", fadeOutMusic);

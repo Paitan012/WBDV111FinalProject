@@ -4,223 +4,574 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KFanverse Admin Dashboard</title>
+    <link rel="icon" type="image/jfif" href="pics/logo.jfif">
     <link rel="stylesheet" href="admin.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        [x-cloak] { display: none !important; }
-        .nav-active { border-bottom: 2px solid black; font-weight: bold; }
-    </style>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans" x-data="{ activeTab: 'dashboard' }">
+<body>
 
-    <nav class="bg-white border-b border-gray-200 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 flex items-center justify-between h-16">
-            <div class="flex items-center space-x-8">
-                <div class="flex items-center space-x-2">
-                   <img src="pics/logo.jfif" alt="KFanverse Logo" class="w-8 h-8 rounded-full object-cover border border-white/20">
-                    <span class="font-bold text-lg">KFanverse</span>
-                </div>
-                <div class="hidden md:flex space-x-6 text-sm">
-                    <button @click="activeTab = 'dashboard'" :class="{'nav-active': activeTab === 'dashboard'}" class="pb-1 hover:text-black">Dashboard</button>
-                    <button @click="activeTab = 'updates'" :class="{'nav-active': activeTab === 'updates'}" class="pb-1 hover:text-black">Manage Updates</button>
-                    <button @click="activeTab = 'quizzes'" :class="{'nav-active': activeTab === 'quizzes'}" class="pb-1 hover:text-black">Manage Quizzes</button>
-                    <button @click="activeTab = 'discussions'" :class="{'nav-active': activeTab === 'discussions'}" class="pb-1 hover:text-black">Manage Discussions</button>
-                    <button @click="activeTab = 'merchandise'" :class="{'nav-active': activeTab === 'merchandise'}" class="pb-1 hover:text-black">Manage Merchandise</button>
-                </div>
-            </div>
-            <button class="flex items-center space-x-1 text-sm text-gray-600 hover:text-black">
-                <i class="fa-solid fa-right-from-bracket"></i>
-                <span>Logout</span>
-            </button>
-        </div>
-    </nav>
+    <nav class="navbar">
+<div class="logo">
+    <img src="pics/logo.jfif" alt="KFanverse Logo">
+    <span>KFanverse</span>
+</div>
+    <ul class="nav-links">
+        <li class="color-dashboard active" onclick="showSection('dashboard', this)">Dashboard</li>
+        <li class="color-updates" onclick="showSection('updates', this)">Manage Updates</li>
+        <li class="color-quizzes" onclick="showSection('quizzes', this)">Manage Quizzes</li>
+        <li class="color-discussions" onclick="showSection('discussions', this)">Manage Discussions</li>
+        <li class="color-merchandise" onclick="showSection('merchandise', this)">Manage Merchandise</li>
+    </ul>
+    <a href="index.html" class="logout">
+    <i class="fa-solid fa-right-from-bracket"></i> Logout
+</a>
+</nav>
 
-    <main class="max-w-7xl mx-auto p-6">
 
-        <section x-show="activeTab === 'dashboard'" x-cloak>
-            <h1 class="text-2xl font-bold mb-1">Dashboard</h1>
-            <p class="text-gray-500 mb-8">Welcome back, Admin!</p>
+    <main class="container">
+        
+        <section id="dashboard" class="content-section active">
+    <div class="header-text">
+        <h1>Dashboard</h1>
+        <p class="instruction-text">Welcome back, Admin!</p>
+    </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-                <div class="bg-white p-6 rounded-lg border border-gray-200 flex items-center space-x-4">
-                    <div class="p-3 bg-gray-100 rounded text-xl"><i class="fa-regular fa-newspaper"></i></div>
-                    <div><div class="text-2xl font-bold">12</div><div class="text-xs text-gray-500">Total Updates</div></div>
+            <div class="stats-grid">
+                <div class="card">
+                    <i class="fa-regular fa-newspaper"></i>
+                    <div><h3>12</h3><p>Total Updates</p></div>
                 </div>
-                <div class="bg-white p-6 rounded-lg border border-gray-200 flex items-center space-x-4">
-                    <div class="p-3 bg-gray-100 rounded text-xl"><i class="fa-regular fa-circle-question"></i></div>
-                    <div><div class="text-2xl font-bold">8</div><div class="text-xs text-gray-500">Total Quizzes</div></div>
+                <div class="card">
+                    <i class="fa-regular fa-circle-question"></i>
+                    <div><h3>8</h3><p>Total Quizzes</p></div>
                 </div>
-                <div class="bg-white p-6 rounded-lg border border-gray-200 flex items-center space-x-4">
-                    <div class="p-3 bg-gray-100 rounded text-xl"><i class="fa-regular fa-comments"></i></div>
-                    <div><div class="text-2xl font-bold">24</div><div class="text-xs text-gray-500">Total Discussions</div></div>
+                <div class="card">
+                    <i class="fa-regular fa-comments"></i>
+                    <div><h3>24</h3><p>Total Discussions</p></div>
                 </div>
-                <div class="bg-white p-6 rounded-lg border border-gray-200 flex items-center space-x-4">
-                    <div class="p-3 bg-gray-100 rounded text-xl"><i class="fa-solid fa-bag-shopping"></i></div>
-                    <div><div class="text-2xl font-bold">15</div><div class="text-xs text-gray-500">Total Products</div></div>
+                <div class="card">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <div><h3>15</h3><p>Total Products</p></div>
                 </div>
             </div>
 
-            <div class="bg-white p-6 rounded-lg border border-gray-200 mb-8">
-                <h3 class="font-bold mb-4">Overview <span class="text-gray-400 font-normal text-sm">(This Week)</span></h3>
-                <div class="h-48 w-full border-b border-l border-gray-200 relative flex items-end justify-between px-4">
-                    <div class="w-full h-full absolute top-0 left-0 flex items-center justify-center text-gray-300 italic">Line Chart Visualization</div>
-                </div>
-                <div class="flex justify-between mt-2 text-xs text-gray-500">
-                    <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="bg-white p-6 rounded-lg border border-gray-200">
-                    <h3 class="font-bold mb-4">Recent Activities</h3>
-                    <ul class="space-y-4 text-sm">
-                        <li class="flex justify-between"><span>• News "New Concert Update" added</span><span class="text-gray-400">2h ago</span></li>
-                        <li class="flex justify-between"><span>• Quiz "K-pop General Knowledge" created</span><span class="text-gray-400">5h ago</span></li>
-                        <li class="flex justify-between"><span>• Product "Lightstick Ver. 2" updated</span><span class="text-gray-400">1d ago</span></li>
-                        <li class="flex justify-between"><span>• Discussion post reported</span><span class="text-gray-400">1d ago</span></li>
-                    </ul>
-                </div>
-                <div class="bg-white p-6 rounded-lg border border-gray-200">
-                    <h3 class="font-bold mb-4">Top Discussions</h3>
-                    <ul class="space-y-4 text-sm">
-                        <li class="flex justify-between"><span>• What is your favorite K-pop group?</span><span class="font-bold">12</span></li>
-                        <li class="flex justify-between"><span>• Best comeback of 2024?</span><span class="font-bold">9</span></li>
-                        <li class="flex justify-between"><span>• Recommend a K-drama!</span><span class="font-bold">7</span></li>
-                        <li class="flex justify-between"><span>• Tips for new K-pop fans</span><span class="font-bold">6</span></li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <section x-show="activeTab === 'updates'" x-cloak>
-            <div class="flex justify-between items-center mb-6">
-                <div>
-                    <h1 class="text-2xl font-bold">Manage Updates</h1>
-                    <p class="text-gray-500 text-sm">Create, edit, and publish updates.</p>
-                </div>
-                <button class="bg-black text-white px-4 py-2 rounded text-sm">+ New Update</button>
-            </div>
+        <div class="svg-wrapper">
+            <svg viewBox="0 0 600 200" preserveAspectRatio="none">
+                <line x1="0" y1="0" x2="600" y2="0" stroke="#333" />
+                <line x1="0" y1="50" x2="600" y2="50" stroke="#333" />
+                <line x1="0" y1="100" x2="600" y2="100" stroke="#333" />
+                <line x1="0" y1="150" x2="600" y2="150" stroke="#333" />
+                <line x1="0" y1="200" x2="600" y2="200" stroke="#333" />
+                
+                <polyline 
+                    fill="none" 
+                    stroke="var(--accent)" 
+                    stroke-width="3" 
+                    stroke-linejoin="round"
+                    points="0,140 100,90 200,125 300,150 400,115 500,50 600,100" />
+                
+                <circle cx="0" cy="140" r="5" fill="var(--accent)" />
+                <circle cx="100" cy="90" r="5" fill="var(--accent)" />
+                <circle cx="200" cy="125" r="5" fill="var(--accent)" />
+                <circle cx="300" cy="150" r="5" fill="var(--accent)" />
+                <circle cx="400" cy="115" r="5" fill="var(--accent)" />
+                <circle cx="500" cy="50" r="5" fill="var(--accent)" />
+                <circle cx="600" cy="100" r="5" fill="var(--accent)" />
+            </svg>
             
-            <div class="bg-white border border-gray-200 rounded-lg overflow-hidden">
-                <div class="p-4 flex space-x-4 border-b border-gray-100">
-                    <input type="text" placeholder="Search updates..." class="border rounded px-3 py-1 text-sm w-64">
-                    <select class="border rounded px-3 py-1 text-sm"><option>All Status</option></select>
-                    <select class="border rounded px-3 py-1 text-sm"><option>All Categories</option></select>
+            <div class="days">
+                <span>Mon</span>
+                <span>Tue</span>
+                <span>Wed</span>
+                <span>Thu</span>
+                <span>Fri</span>
+                <span>Sat</span>
+                <span>Sun</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+            <div class="bottom-grid">
+                <div class="list-card">
+                    <h3>Recent Activities</h3>
+                    <ul>
+                        <li>News "New Concert Update" added <span>2h ago</span></li>
+                        <li>Quiz "K-pop General Knowledge" created <span>5h ago</span></li>
+                        <li>Product "Lightstick Ver. 2" updated <span>1d ago</span></li>
+                        <li>Discussion post reported <span>1d ago</span></li>
+                    </ul>
                 </div>
-                <table class="w-full text-left text-sm">
-                    <thead class="bg-gray-50 border-b">
-                        <tr>
-                            <th class="p-4">Title</th><th class="p-4">Category</th><th class="p-4">Status</th><th class="p-4">Published At</th><th class="p-4 text-right">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="border-b">
-                            <td class="p-4 flex items-center space-x-2"><div class="w-8 h-8 bg-gray-100 border text-[10px] flex items-center justify-center">IMG</div> <span>New Concert Update</span></td>
-                            <td class="p-4">News</td>
-                            <td class="p-4"><span class="bg-green-100 text-green-700 px-2 py-0.5 rounded-full text-xs text-center">Published</span></td>
-                            <td class="p-4">May 12, 2024 10:00 AM</td>
-                            <td class="p-4 text-right space-x-2"><button class="hover:text-blue-600">✎</button><button class="hover:text-blue-600">👁</button><button class="hover:text-red-600">🗑</button></td>
-                        </tr>
-                        <tr class="border-b">
-                            <td class="p-4 flex items-center space-x-2"><div class="w-8 h-8 bg-gray-100 border text-[10px] flex items-center justify-center">IMG</div> <span>Lightstick Ver. 2 Released</span></td>
-                            <td class="p-4">Product</td>
-                            <td class="p-4"><span class="bg-green-100 text-green-700 px-2 py-0.5 rounded-full text-xs text-center">Published</span></td>
-                            <td class="p-4">May 10, 2024 09:30 AM</td>
-                            <td class="p-4 text-right space-x-2"><button class="hover:text-blue-600">✎</button><button class="hover:text-blue-600">👁</button><button class="hover:text-red-600">🗑</button></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="list-card">
+                    <h3>Top Discussions</h3>
+                    <ul>
+                        <li>What is your favorite K-pop group? <span class="badge">12</span></li>
+                        <li>Best comeback of 2024? <span class="badge">9</span></li>
+                        <li>Recommend a K-drama! <span class="badge">7</span></li>
+                        <li>Tips for new K-pop fans <span class="badge">6</span></li>
+                    </ul>
+                </div>
             </div>
         </section>
 
-        <section x-show="activeTab === 'quizzes'" x-cloak>
-            <div class="flex justify-between items-center mb-6">
-                <div>
-                    <h1 class="text-2xl font-bold">Manage Quizzes</h1>
-                    <p class="text-gray-500 text-sm">Create, edit, and manage quizzes.</p>
-                </div>
-                <button class="bg-black text-white px-4 py-2 rounded text-sm">+ New Quiz</button>
-            </div>
-            <div class="bg-white border border-gray-200 rounded-lg overflow-hidden">
-                <table class="w-full text-left text-sm">
-                    <thead class="bg-gray-50 border-b">
-                        <tr>
-                            <th class="p-4">Title</th><th class="p-4">Questions</th><th class="p-4">Category</th><th class="p-4">Status</th><th class="p-4">Created At</th><th class="p-4 text-right">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="border-b">
-                            <td class="p-4">K-pop General Knowledge</td><td class="p-4">20</td><td class="p-4">General</td>
-                            <td class="p-4"><span class="bg-green-100 text-green-700 px-2 py-0.5 rounded-full text-xs">Published</span></td>
-                            <td class="p-4">May 9, 2024</td>
-                            <td class="p-4 text-right space-x-2">✎ 👁 🗑</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
+<section id="updates" class="content-section">
+    <div class="section-header">
+        <div class="header-text">
+            <h1>Manage Updates</h1>
+            <p>Create, edit, and publish updates.</p>
+        </div>
+        <button class="btn-primary btn-updates">
+            <i class="fa-solid fa-plus"></i> New Update
+        </button>
+    </div>
 
-        <section x-show="activeTab === 'discussions'" x-cloak>
-            <div class="flex justify-between items-center mb-6">
-                <div>
-                    <h1 class="text-2xl font-bold">Manage Discussions</h1>
-                    <p class="text-gray-500 text-sm">Review and manage user discussions.</p>
-                </div>
-                <button class="bg-gray-800 text-white px-4 py-2 rounded text-sm">Mark All as Read</button>
-            </div>
-            <div class="bg-white border border-gray-200 rounded-lg overflow-hidden">
-                <table class="w-full text-left text-sm">
-                    <thead class="bg-gray-50 border-b">
-                        <tr>
-                            <th class="p-4">Topic</th><th class="p-4">Author</th><th class="p-4">Replies</th><th class="p-4">Status</th><th class="p-4">Last Activity</th><th class="p-4 text-right">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="border-b">
-                            <td class="p-4 font-medium">What is your favorite K-pop group?</td><td class="p-4">User123</td><td class="p-4">12</td>
-                            <td class="p-4 text-green-600">Active</td>
-                            <td class="p-4">May 12, 2024</td>
-                            <td class="p-4 text-right">👁 🗑</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
+    <div class="filter-row">
+        <div class="search-container">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Search updates..." id="updateSearch">
+        </div>
+        <select class="filter-select">
+            <option value="">All Status</option>
+            <option value="published">Published</option>
+            <option value="draft">Draft</option>
+        </select>
+        <select class="filter-select">
+            <option value="">All Categories</option>
+            <option value="news">News</option>
+            <option value="product">Product</option>
+            <option value="quiz">Quiz</option>
+        </select>
+    </div>
 
-        <section x-show="activeTab === 'merchandise'" x-cloak>
-            <div class="flex justify-between items-center mb-6">
-                <div>
-                    <h1 class="text-2xl font-bold">Manage Merchandise</h1>
-                    <p class="text-gray-500 text-sm">Add, edit, and manage merchandise products.</p>
-                </div>
-                <button class="bg-black text-white px-4 py-2 rounded text-sm">+ Add Product</button>
-            </div>
-            <div class="bg-white border border-gray-200 rounded-lg overflow-hidden">
-                <table class="w-full text-left text-sm">
-                    <thead class="bg-gray-50 border-b">
-                        <tr>
-                            <th class="p-4">Product</th><th class="p-4">Category</th><th class="p-4">Price</th><th class="p-4">Stock</th><th class="p-4">Status</th><th class="p-4 text-right">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="border-b">
-                            <td class="p-4 flex items-center space-x-2"><div class="w-8 h-8 border bg-gray-50"></div> <span>Lightstick Ver. 2</span></td>
-                            <td class="p-4">Lightstick</td><td class="p-4">$45.00</td><td class="p-4">120</td>
-                            <td class="p-4 text-green-600">Active</td>
-                            <td class="p-4 text-right">✎ 👁 🗑</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                    <th>Published At</th>
+                    <th class="text-right">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="title-cell">
+                            <div class="img-placeholder"></div>
+                            <span>New Concert Update</span>
+                        </div>
+                    </td>
+                    <td>News</td>
+                    <td><span class="badge status-published">Published</span></td>
+                    <td>May 12, 2024 10:00 AM</td>
+                    <td class="table-actions">
+                        <i class="fa-solid fa-pen" title="Edit"></i>
+                        <i class="fa-solid fa-eye" title="View"></i>
+                        <i class="fa-solid fa-trash" title="Delete"></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="title-cell">
+                            <div class="img-placeholder"></div>
+                            <span>Lightstick Ver. 2 Released</span>
+                        </div>
+                    </td>
+                    <td>Product</td>
+                    <td><span class="badge status-published">Published</span></td>
+                    <td>May 10, 2024 09:30 AM</td>
+                    <td class="table-actions">
+                        <i class="fa-solid fa-pen"></i>
+                        <i class="fa-solid fa-eye"></i>
+                        <i class="fa-solid fa-trash"></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="title-cell">
+                            <div class="img-placeholder"></div>
+                            <span>K-pop General Knowledge Quiz</span>
+                        </div>
+                    </td>
+                    <td>Quiz</td>
+                    <td><span class="badge status-draft">Draft</span></td>
+                    <td>May 9, 2024 04:15 PM</td>
+                    <td class="table-actions">
+                        <i class="fa-solid fa-pen"></i>
+                        <i class="fa-solid fa-eye"></i>
+                        <i class="fa-solid fa-trash"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="table-footer">
+        <span>Showing 1 to 4 of 12 results</span>
+        <div class="pagination">
+            <button class="pag-btn"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="pag-btn active">1</button>
+            <button class="pag-btn">2</button>
+            <button class="pag-btn">3</button>
+            <button class="pag-btn"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+    </div>
+</section>
+
+<section id="quizzes" class="content-section">
+    <div class="section-header">
+        <div class="header-text">
+            <h1>Manage Quizzes</h1>
+            <p>Create, edit, and manage quizzes.</p>
+        </div>
+        <button class="btn-primary btn-quizzes">
+            <i class="fa-solid fa-plus"></i> New Quiz
+        </button>
+    </div>
+
+    <div class="filter-row">
+        <div class="search-container">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Search quizzes..." id="quizSearch">
+        </div>
+        <select class="filter-select">
+            <option value="">All Status</option>
+            <option value="published">Published</option>
+            <option value="draft">Draft</option>
+        </select>
+        <select class="filter-select">
+            <option value="">All Categories</option>
+            <option value="general">General</option>
+            <option value="debut">Debut</option>
+            <option value="lyrics">Lyrics</option>
+        </select>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Questions</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                    <th>Created At</th>
+                    <th class="text-right">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="title-cell">
+                            <div class="img-placeholder"></div>
+                            <span>K-pop General Knowledge</span>
+                        </div>
+                    </td>
+                    <td>20</td>
+                    <td>General</td>
+                    <td><span class="badge status-published">Published</span></td>
+                    <td>May 9, 2024 04:15 PM</td>
+                    <td class="table-actions">
+                        <i class="fa-solid fa-pen" title="Edit"></i>
+                        <i class="fa-solid fa-eye" title="View"></i>
+                        <i class="fa-solid fa-trash" title="Delete"></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="title-cell">
+                            <div class="img-placeholder"></div>
+                            <span>K-pop Debut Quiz</span>
+                        </div>
+                    </td>
+                    <td>15</td>
+                    <td>Debut</td>
+                    <td><span class="badge status-published">Published</span></td>
+                    <td>May 7, 2024 02:30 PM</td>
+                    <td class="table-actions">
+                        <i class="fa-solid fa-pen"></i>
+                        <i class="fa-solid fa-eye"></i>
+                        <i class="fa-solid fa-trash"></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="title-cell">
+                            <div class="img-placeholder"></div>
+                            <span>K-pop Lyrics Challenge</span>
+                        </div>
+                    </td>
+                    <td>25</td>
+                    <td>Lyrics</td>
+                    <td><span class="badge status-draft">Draft</span></td>
+                    <td>May 6, 2024 11:20 AM</td>
+                    <td class="table-actions">
+                        <i class="fa-solid fa-pen"></i>
+                        <i class="fa-solid fa-eye"></i>
+                        <i class="fa-solid fa-trash"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="table-footer">
+        <span>Showing 1 to 4 of 8 results</span>
+        <div class="pagination">
+            <button class="pag-btn"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="pag-btn active">1</button>
+            <button class="pag-btn">2</button>
+            <button class="pag-btn"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+    </div>
+</section>
+
+<section id="discussions" class="content-section">
+    <div class="section-header">
+        <div class="header-text">
+            <h1>Manage Discussions</h1>
+            <p>Review and manage user discussions.</p>
+        </div>
+        <button class="btn-primary btn-discussions">
+            Mark All as Read
+        </button>
+    </div>
+
+    <div class="filter-row">
+        <div class="search-container">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Search discussions..." id="discussionSearch">
+        </div>
+        <select class="filter-select">
+            <option value="">All Status</option>
+            <option value="active">Active</option>
+            <option value="flagged">Flagged</option>
+        </select>
+        <select class="filter-select">
+            <option value="">All Categories</option>
+            <option value="general">General</option>
+            <option value="k-drama">K-Drama</option>
+        </select>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Topic</th>
+                    <th>Author</th>
+                    <th>Replies</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                    <th>Last Activity</th>
+                    <th class="text-right">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>What is your favorite K-pop group?</td>
+                    <td>User123</td>
+                    <td>12</td>
+                    <td>General</td>
+                    <td><span class="badge status-active">Active</span></td>
+                    <td>May 12, 2024 01:20 PM</td>
+                    <td class="table-actions">
+                        <i class="fa-solid fa-eye" title="View"></i>
+                        <i class="fa-solid fa-trash" title="Delete"></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Best comeback of 2024?</td>
+                    <td>KpopFan88</td>
+                    <td>9</td>
+                    <td>General</td>
+                    <td><span class="badge status-active">Active</span></td>
+                    <td>May 12, 2024 12:45 PM</td>
+                    <td class="table-actions">
+                        <i class="fa-solid fa-eye"></i>
+                        <i class="fa-solid fa-trash"></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Recommend a K-drama!</td>
+                    <td>DramaLover</td>
+                    <td>7</td>
+                    <td>K-Drama</td>
+                    <td><span class="badge status-active">Active</span></td>
+                    <td>May 11, 2024 09:30 PM</td>
+                    <td class="table-actions">
+                        <i class="fa-solid fa-eye"></i>
+                        <i class="fa-solid fa-trash"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="table-footer">
+        <span>Showing 1 to 4 of 18 results</span>
+        <div class="pagination">
+            <button class="pag-btn"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="pag-btn active">1</button>
+            <button class="pag-btn">2</button>
+            <button class="pag-btn">3</button>
+            <button class="pag-btn">4</button>
+            <button class="pag-btn">5</button>
+            <button class="pag-btn"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+    </div>
+</section>
+
+<section id="merchandise" class="content-section">
+    <div class="section-header">
+        <div class="header-text">
+            <h1>Manage Merchandise</h1>
+            <p>Add, edit, and manage merchandise products.</p>
+        </div>
+        <button class="btn-primary btn-merchandise">
+            <i class="fa-solid fa-plus"></i> Add Product
+        </button>
+    </div>
+
+    <div class="filter-row">
+        <div class="search-container">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Search products..." id="merchSearch">
+        </div>
+        <select class="filter-select">
+            <option value="">All Status</option>
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+        </select>
+        <select class="filter-select">
+            <option value="">All Categories</option>
+            <option value="lightstick">Lightstick</option>
+            <option value="apparel">Apparel</option>
+            <option value="accessories">Accessories</option>
+        </select>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Status</th>
+                    <th class="text-right">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="title-cell">
+                            <div class="img-placeholder"></div>
+                            <span>Lightstick Ver. 2</span>
+                        </div>
+                    </td>
+                    <td>Lightstick</td>
+                    <td>$45.00</td>
+                    <td>120</td>
+                    <td><span class="badge status-active">Active</span></td>
+                    <td class="table-actions">
+                        <i class="fa-solid fa-pen" title="Edit"></i>
+                        <i class="fa-solid fa-eye" title="View"></i>
+                        <i class="fa-solid fa-trash" title="Delete"></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="title-cell">
+                            <div class="img-placeholder"></div>
+                            <span>Official T-shirt</span>
+                        </div>
+                    </td>
+                    <td>Apparel</td>
+                    <td>$25.00</td>
+                    <td>80</td>
+                    <td><span class="badge status-active">Active</span></td>
+                    <td class="table-actions">
+                        <i class="fa-solid fa-pen"></i>
+                        <i class="fa-solid fa-eye"></i>
+                        <i class="fa-solid fa-trash"></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="title-cell">
+                            <div class="img-placeholder"></div>
+                            <span>Photo Card Set</span>
+                        </div>
+                    </td>
+                    <td>Accessories</td>
+                    <td>$15.00</td>
+                    <td>200</td>
+                    <td><span class="badge status-active">Active</span></td>
+                    <td class="table-actions">
+                        <i class="fa-solid fa-pen"></i>
+                        <i class="fa-solid fa-eye"></i>
+                        <i class="fa-solid fa-trash"></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="title-cell">
+                            <div class="img-placeholder"></div>
+                            <span>Hoodie</span>
+                        </div>
+                    </td>
+                    <td>Apparel</td>
+                    <td>$60.00</td>
+                    <td>50</td>
+                    <td><span class="badge status-inactive">Inactive</span></td>
+                    <td class="table-actions">
+                        <i class="fa-solid fa-pen"></i>
+                        <i class="fa-solid fa-eye"></i>
+                        <i class="fa-solid fa-trash"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="table-footer">
+        <span>Showing 1 to 4 of 16 results</span>
+        <div class="pagination">
+            <button class="pag-btn"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="pag-btn active">1</button>
+            <button class="pag-btn">2</button>
+            <button class="pag-btn">3</button>
+            <button class="pag-btn">4</button>
+            <button class="pag-btn"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+    </div>
+</section>
 
     </main>
 
-    <footer class="text-center py-8 text-gray-400 text-xs">
-        © 2025 KFanverse Admin Panel
-    </footer>
+    <footer>© 2025 KFanverse Admin Panel</footer>
 
+<script>
+function showSection(id, el) {
+    // hide all sections
+    document.querySelectorAll(".content-section").forEach(section => {
+        section.classList.remove("active");
+    });
+
+    // show selected section
+    document.getElementById(id).classList.add("active");
+
+    // remove active from all nav
+    document.querySelectorAll(".nav-links li").forEach(li => {
+        li.classList.remove("active");
+    });
+
+    // add active to clicked nav
+    el.classList.add("active");
+}
+</script>
 </body>
 </html>
