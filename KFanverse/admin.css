@@ -442,7 +442,7 @@ h1 {
     min-width: 160px;
     background: var(--bg-card);
     border: 1px solid var(--border);
-    color: #fff;
+    color: #646464;
     padding: 10px 12px;
     border-radius: 10px;
 }
