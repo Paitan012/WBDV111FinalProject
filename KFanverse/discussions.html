@@ -912,7 +912,7 @@ nav ul li a.active::after {
             <ul>
     <li><a href="index.html">HOME</a></li>
     <li><a href="updates.html">UPDATES</a></li>
-    <li><a href="quiz.html">QUIZZES</a></li>
+    <li><a href="quiz.html">TRIVIA QUIZZES</a></li>
     <li><a href="discussions.html" class="active">DISCUSSIONS</a></li>
     <li><a href="merch.html">MERCHANDISE</a></li>
     <li><a href="index.html#about">ABOUT US</a></li>
@@ -1067,9 +1067,9 @@ nav ul li a.active::after {
         <input id="searchInput" type="text" placeholder="🔍 Search discussions...">
     </div>
 
-    <a href="#" class="btn-create" onclick="openPostModal(); return false;">
-        + CREATE POST
-    </a>
+    <a href="#" class="btn-create" onclick="openGuidelines(); return false;">
+    + CREATE POST
+</a>
 
 </div>
 
@@ -1148,6 +1148,48 @@ nav ul li a.active::after {
 </div>
 
 <!-- ================= CREATE POST MODAL ================= -->
+<!-- ================= COMMUNITY GUIDELINES MODAL ================= -->
+<div id="guidelinesOverlay" class="overlay">
+
+    <div class="auth-card">
+
+        <button class="close-modal" onclick="closeGuidelines()">✕</button>
+
+        <div class="auth-tabs">
+            <div class="auth-tab active">COMMUNITY GUIDELINES</div>
+        </div>
+
+        <div class="auth-body">
+
+            <div class="terms-box">
+
+                <div class="terms-title">
+                    Before creating a post:
+                </div>
+
+                <ul class="terms-list">
+                    <li>Respect all users and fandoms.</li>
+                    <li>No hate speech, bullying, or harassment.</li>
+                    <li>No spam, fake news, or misleading content.</li>
+                    <li>Keep discussions appropriate and relevant.</li>
+                    <li>Do not post offensive or explicit images.</li>
+                </ul>
+
+                <label class="terms-check">
+                    <input type="checkbox" id="guidelinesCheck">
+                    I agree to follow the community guidelines.
+                </label>
+
+            </div>
+
+            <button class="btn-auth-submit" onclick="continueCreatePost()">
+                CONTINUE
+            </button>
+
+        </div>
+    </div>
+</div>
+
 <div id="postOverlay" class="overlay">
 
     <div class="auth-card">
@@ -1737,6 +1779,39 @@ document.getElementById("loginForm").addEventListener("submit", (e) => {
     updateAuthState();
     closeLogin();
 });
+
+/* =============================
+   COMMUNITY GUIDELINES
+============================= */
+
+function openGuidelines() {
+
+    if (localStorage.getItem("isLoggedIn") !== "true") {
+        alert("Please log in first.");
+        openLogin();
+        return;
+    }
+
+    document.getElementById("guidelinesOverlay").style.display = "flex";
+}
+
+function closeGuidelines() {
+    document.getElementById("guidelinesOverlay").style.display = "none";
+}
+
+function continueCreatePost() {
+
+    const checked = document.getElementById("guidelinesCheck").checked;
+
+    if (!checked) {
+        alert("Please agree to the Community Guidelines first.");
+        return;
+    }
+
+    closeGuidelines();
+
+    openPostModal();
+}
 </script>
 </body>
 </html>
